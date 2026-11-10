@@ -72,3 +72,31 @@ test('malformed RLE is rejected with its line number', async ({ page }) => {
   await (await chooser).setFiles({ name: 'bad.rle', mimeType: 'text/plain', buffer: Buffer.from('x = 3, y = 1\n3o\n') });
   await expect(page.locator('.callout-error')).toContainText('terminator');
 });
+
+test('the lattice box height can be dragged, is remembered, and resets on double-click', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await newLifeModel(page);
+  const frame = page.locator('.canvas-frame').first();
+  const handle = page.getByRole('separator', { name: 'Resize lattice height' });
+  const h0 = (await frame.boundingBox())!.height;
+  const width0 = (await frame.boundingBox())!.width;
+  const hb = (await handle.boundingBox())!;
+  await page.mouse.move(hb.x + hb.width - 8, hb.y + hb.height / 2);
+  await page.mouse.down();
+  await page.mouse.move(hb.x + hb.width - 8, hb.y + hb.height / 2 + 150, { steps: 6 });
+  await page.mouse.up();
+  await expect.poll(async () => Math.round((await frame.boundingBox())!.height - h0)).toBeGreaterThan(140);
+  expect((await frame.boundingBox())!.width).toBe(width0); // width is unchanged
+  const dragged = (await frame.boundingBox())!.height;
+
+  await page.reload();
+  await expect(page.getByRole('button', { name: 'Play' })).toBeEnabled();
+  await expect.poll(async () => Math.round((await frame.boundingBox())!.height)).toBe(Math.round(dragged));
+
+  await handle.focus();
+  await page.keyboard.press('ArrowUp');
+  await expect.poll(async () => Math.round((await frame.boundingBox())!.height)).toBe(Math.round(dragged - 20));
+
+  await handle.dblclick();
+  await expect.poll(async () => Math.round((await frame.boundingBox())!.height)).toBe(Math.round(h0));
+});

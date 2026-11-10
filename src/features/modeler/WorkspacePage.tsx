@@ -36,6 +36,7 @@ import { FamilySection, StatesSection, StreamSection, needsStream } from './Fami
 import { MultistateInspector } from './CellInspector';
 import { HistorySection } from './HistorySection';
 import { ProvenanceSection } from './ProvenanceSection';
+import { CanvasResizer } from './CanvasResizer';
 import { snapshotPng } from '../../renderers/pngExport';
 import { ENGINE_VERSION } from '../../domain/contracts/model';
 import { explainCell } from '../../domain/rules/explainCell';
@@ -871,34 +872,36 @@ export function WorkspacePage({ projectId }: { projectId: string }) {
               )}
             </Callout>
           )}
-          <GridCanvas
-            ref={canvas}
-            width={dims.width}
-            height={dims.height}
-            stateLabels={model.stateLabels}
-            palette={palette}
-            tool={tool}
-            showGrid={showGrid}
-            initialCamera={initialView}
-            inspect={inspect}
-            defaultCursor={oneD ? { x: model.width >> 1, y: Math.max(0, status.generation - firstGeneration) } : undefined}
-            summary={summary}
-            getCells={getCells}
-            onStrokeStart={onStrokeStart}
-            onStrokeCells={onStrokeCells}
-            onStrokeEnd={onStrokeEnd}
-            onInspect={setInspect}
-            onToggleCell={toggleCell}
-            onHover={setHover}
-            stampPattern={!oneD && tool === 'stamp' ? pattern : null}
-            selection={oneD ? null : selection}
-            onSelect={(r) => setSelection(r)}
-            onStamp={onStamp}
-            onCameraChange={(c) => {
-              cameraRef.current = { ...c, showGrid };
-              if (save.kind === 'saved') void saveProject(projectId, { ...model, name }, cameraRef.current, 'view').catch(() => {});
-            }}
-          />
+          <CanvasResizer>
+            <GridCanvas
+              ref={canvas}
+              width={dims.width}
+              height={dims.height}
+              stateLabels={model.stateLabels}
+              palette={palette}
+              tool={tool}
+              showGrid={showGrid}
+              initialCamera={initialView}
+              inspect={inspect}
+              defaultCursor={oneD ? { x: model.width >> 1, y: Math.max(0, status.generation - firstGeneration) } : undefined}
+              summary={summary}
+              getCells={getCells}
+              onStrokeStart={onStrokeStart}
+              onStrokeCells={onStrokeCells}
+              onStrokeEnd={onStrokeEnd}
+              onInspect={setInspect}
+              onToggleCell={toggleCell}
+              onHover={setHover}
+              stampPattern={!oneD && tool === 'stamp' ? pattern : null}
+              selection={oneD ? null : selection}
+              onSelect={(r) => setSelection(r)}
+              onStamp={onStamp}
+              onCameraChange={(c) => {
+                cameraRef.current = { ...c, showGrid };
+                if (save.kind === 'saved') void saveProject(projectId, { ...model, name }, cameraRef.current, 'view').catch(() => {});
+              }}
+            />
+          </CanvasResizer>
           <div className="canvas-status" aria-hidden>
             <span>
               Generation <strong>{status.generation}</strong>
