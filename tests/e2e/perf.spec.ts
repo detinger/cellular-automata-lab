@@ -1,4 +1,4 @@
-// PLAN.md §9.4 budgets measured in a real browser. Opt-in: PERF=1 npm run test:e2e -- perf.spec.ts
+// Performance budgets measured in a real browser. Opt-in: PERF=1 npm run test:e2e -- perf.spec.ts
 // Writes test-results/perf-<browser>.json; docs/performance.md records the numbers with the device used.
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { expect, test } from '@playwright/test';

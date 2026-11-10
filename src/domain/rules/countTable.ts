@@ -1,4 +1,4 @@
-// Declarative count rule — count-table/v1 (PLAN.md §7.3). Data only: no expressions or code.
+// Declarative count rule — count-table/v1. Data only: no expressions or code.
 // Validation enumerates every reachable (center state, neighbor count tuple) case, rejects
 // overlapping or unreachable clauses, and compiles the result to a bounded lookup.
 import type { CountClause, Neighborhood, RuleSpec } from '../contracts/model';

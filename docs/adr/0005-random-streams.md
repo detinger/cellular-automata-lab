@@ -1,10 +1,10 @@
 # ADR 0005: Versioned random streams with a fixed draw schedule
 
-**Status:** accepted (Phase 3, 2026-11-10)
+**Status:** accepted (2026-11-10)
 
 ## Context
 
-Stochastic runs must be exactly reproducible across pause/resume, checkpoints, inspection and experiment ordering (PLAN.md §7.5, REP-01–REP-07).
+Stochastic runs must be exactly reproducible across pause/resume, checkpoints, inspection and experiment ordering.
 
 ## Decision
 

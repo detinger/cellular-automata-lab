@@ -1,4 +1,4 @@
-// E2E-01 / PLAN.md §1.2: open a blinker, inspect, step, explain, reset, edit, undo, save, reload.
+// E2E-01: open a blinker, inspect, step, explain, reset, edit, undo, save, reload.
 import { expect, test } from '@playwright/test';
 
 const alive = (page: import('@playwright/test').Page) => page.locator('.kpi').first().locator('.kpi-value');

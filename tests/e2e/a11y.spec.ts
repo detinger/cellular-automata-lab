@@ -1,4 +1,4 @@
-// PLAN.md §9.5: every interactive control has an accessible name, on every main page. This is an
+// Accessibility: every interactive control has an accessible name, on every main page. This is an
 // automated floor, not a replacement for the manual review recorded in docs/acceptance.
 import { expect, test, type Page } from '@playwright/test';
 

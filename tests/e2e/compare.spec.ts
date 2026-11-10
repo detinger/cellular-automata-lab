@@ -1,4 +1,4 @@
-// PLAN.md §9.3 E2E-05: baseline/alternative with a changed boundary — the diff lists the change and the
+// E2E-05: baseline/alternative with a changed boundary — the diff lists the change and the
 // comparison uses the right normalization; plus a paired replicated SIR comparison.
 import { expect, test, type Page } from '@playwright/test';
 

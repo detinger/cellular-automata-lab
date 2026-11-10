@@ -1,4 +1,4 @@
-// Inspector for multistate and stochastic 2D families (PLAN.md §3.1 contextual inspector, §3.4).
+// Inspector for multistate and stochastic 2D families.
 import { Info } from 'lucide-react';
 import type { Model } from '../../domain/contracts/model';
 import type { CellExplanation } from '../../domain/rules/explainCell';

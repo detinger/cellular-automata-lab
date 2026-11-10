@@ -1,6 +1,6 @@
 # Supported capabilities and known limitations
 
-Engine `ca-studio-engine/1.0.0`. The in-app **Capabilities** page shows the same information. Normative semantics are in PLAN.md §7; this page states what this build implements.
+Engine `ca-studio-engine/1.0.0`. The in-app **Capabilities** page shows the same information. This page states exactly what this build implements.
 
 ## Rule families
 
@@ -20,7 +20,7 @@ All families update synchronously. Boundaries: periodic (torus) or a fixed exter
 
 - Adapter `ca-studio-prng/1`: seedrandom 3.0.5, Alea algorithm, state save/restore. Global `Math.random` is never replaced or used for simulation.
 - Two streams per run: initialization (one draw per cell, row-major, cumulative probabilities with strict `<`) and transition (exactly two draws per cell per generation, u0 then u1, row-major, always consumed).
-- Seeds: interactive sessions use `["ca-studio-session-v1", seed, stream]`; experiments use `["ca-studio-seed-v1", master, experiment, configuration, replicate, stream]` or the paired form (PLAN.md §7.5). The exact strings are stored with every run.
+- Seeds: interactive sessions use `["ca-studio-session-v1", seed, stream]`; experiments use `["ca-studio-seed-v1", master, experiment, configuration, replicate, stream]` or the paired form. The exact strings are stored with every run.
 - Checkpoints (cells, generation, PRNG state, metrics) every 100 generations in a 16 MiB ring; jumping to a generation replays forward from the nearest checkpoint. Inspecting a stochastic cell replays its recorded draws without touching the live stream.
 
 ## Measurements
@@ -44,10 +44,10 @@ Single run, replications, one- and two-factor sweeps over rule parameters, latti
 
 ## Known limitations
 
-- CPU only; no GPU kernels, Gray–Scott, hexagonal/3D lattices or asynchronous schedules (P2, not implemented).
+- CPU only; no GPU kernels, Gray–Scott, hexagonal/3D lattices or asynchronous schedules.
 - No automatic pattern classification or spaceship detection; no labels like "chaotic" or "universal".
 - Data is stored in the browser (IndexedDB). Clearing site data deletes it. Learning progress is local and not tamper-proof.
 - Written answers are never auto-graded.
 - Experiment packages cannot be imported back.
 - Offline use requires one prior online visit; updates wait for the user to reload.
-- Browser coverage: Chrome and WebKit verified by the automated suite; Firefox not yet verified (see docs/acceptance/phase-2-6.md).
+- Browser coverage: Chrome and WebKit verified by the automated suite; Firefox not yet verified (see docs/testing.md).

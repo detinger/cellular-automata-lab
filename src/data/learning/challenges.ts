@@ -1,4 +1,4 @@
-// Ten guided challenges (PLAN.md §3.7). Predicates assess behavior and declared constraints, not one
+// Ten guided challenges. Predicates assess behavior and declared constraints, not one
 // exact drawing, and run the same engine as the app. Each returns observed vs expected with an explanation.
 import type { Model } from '../../domain/contracts/model';
 import { createEngine } from '../../domain/engine/engine';
@@ -35,7 +35,7 @@ const answerNum = (ctx: ChallengeContext, id: string) => {
   return String(ctx.answers[id] ?? '').trim() === '' || !Number.isFinite(v) ? null : v;
 };
 
-// CA-01 fixture (hand-calculated, §9.1 style): T-tetromino on a 7 × 7 dead-exterior grid.
+// CA-01 fixture: T-tetromino on a 7 × 7 dead-exterior grid.
 export const CA01_START: Array<[number, number]> = [
   [2, 2],
   [3, 2],

@@ -1,4 +1,4 @@
-// PLAN.md §9.3 E2E-03 (2 × 3 grid, 3 replicates → 18 runs), E2E-04 (cancel, export, reload) and
+// E2E-03 (2 × 3 grid, 3 replicates → 18 runs), E2E-04 (cancel, export, reload) and
 // E2E-06 (report values reconcile with the metrics CSV and run metadata).
 import { expect, test, type Download, type Page } from '@playwright/test';
 

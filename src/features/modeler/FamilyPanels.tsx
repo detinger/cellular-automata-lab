@@ -1,5 +1,5 @@
 // Left-panel model definition for 2D families: family and parameters, count-table clauses,
-// state legend/labels/brush, and the random stream seed (PLAN.md §3.1, §7.3–§7.5).
+// state legend/labels/brush, and the random stream seed.
 import { useEffect, useState } from 'react';
 import { Dices, Plus, Trash2 } from 'lucide-react';
 import type { CountClause, Model, Neighborhood, RuleSpec } from '../../domain/contracts/model';

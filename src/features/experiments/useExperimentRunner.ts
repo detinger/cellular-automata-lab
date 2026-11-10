@@ -1,5 +1,4 @@
-// Drives the experiment worker and persists results as they arrive (PLAN.md §8.4: a run's terminal
-// status is stored only together with its metric chunk; recovery checkpoints every 10 s).
+// Drives the experiment worker and persists results as they arrive.
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { ExperimentResponse } from '../../domain/contracts/experimentWorker';
 import type { ExperimentRecord } from '../../storage/db';

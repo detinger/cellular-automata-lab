@@ -1,4 +1,4 @@
-// IndexedDB repository via Dexie (PLAN.md §8.2, §8.4). Revision creation and the project pointer
+// IndexedDB repository via Dexie. Revision creation and the project pointer
 // update happen in one transaction.
 import Dexie, { type PromiseExtended, type Table } from 'dexie';
 import type { Model, ModelSpec } from '../domain/contracts/model';
@@ -48,11 +48,11 @@ export interface ExperimentRecord {
   updatedAt: string;
   status: ExperimentStatus;
   definition: ExperimentDefinition;
-  /** Wall-clock recovery checkpoint of the run in progress (§8.4); cleared when the run ends. */
+  /** Wall-clock recovery checkpoint of the run in progress; cleared when the run ends. */
   recovery: RunSnapshot | null;
   completedRuns: number;
   totalRuns: number;
-  /** Student's written interpretation (§3.6 step 7). */
+  /** Student's written interpretation. */
   conclusion: string;
   /** Browser/runtime metadata of the session that executed the runs. */
   runtime: string | null;
@@ -99,7 +99,7 @@ export interface AssessmentRecord {
   createdAt: string;
 }
 
-/** Baseline vs. alternative comparison (§3.6). The two experiments are ordinary experiment records. */
+/** Baseline vs. alternative comparison. The two experiments are ordinary experiment records. */
 export interface ComparisonRecord {
   id: string;
   baselineProjectId: string;
@@ -119,7 +119,7 @@ export const DB_NAME = 'ca-studio';
 let newerDatabaseVersion: number | null = null;
 export const DB_VERSION = 3;
 
-export class StudioDb extends Dexie {
+export class LabDb extends Dexie {
   projects!: Table<ProjectRecord, string>;
   revisions!: Table<RevisionRecord, string>;
   experiments!: Table<ExperimentRecord, string>;
@@ -133,7 +133,7 @@ export class StudioDb extends Dexie {
     super(name);
     this.dbName = name;
     this.version(1).stores({ projects: 'id, updatedAt', revisions: 'id, projectId, hash' });
-    // v2 (Phases 4–5): experiments, runs, metric chunks, learning progress and assessments.
+    // v2: experiments, runs, metric chunks, learning progress and assessments.
     // Existing projects and revisions are kept as they are.
     this.version(2)
       .stores({
@@ -154,7 +154,7 @@ export class StudioDb extends Dexie {
             if (p.seed === undefined) p.seed = '1';
           });
       });
-    // v3 (Phase 5): baseline/alternative comparisons.
+    // v3: baseline/alternative comparisons.
     this.version(3).stores({ comparisons: 'id, baselineProjectId, alternativeProjectId, updatedAt' });
   }
 
@@ -176,7 +176,7 @@ export class StudioDb extends Dexie {
   }
 }
 
-export const db = new StudioDb();
+export const db = new LabDb();
 const now = () => new Date().toISOString();
 const newId = (prefix: string) => `${prefix}-${crypto.randomUUID()}`;
 
@@ -260,7 +260,7 @@ export async function deleteProject(id: string) {
   });
 }
 
-// ---- Experiments (§8.2, §8.4) ----
+// ---- Experiments ----
 
 export async function createExperiment(def: ExperimentDefinition, totalRuns: number): Promise<string> {
   const t = now();
@@ -305,7 +305,7 @@ export async function saveRun(experimentId: string, result: RunResult, initialHa
     integrity: await sha256(JSON.stringify(samples)),
   };
   await db.transaction('rw', [db.metricChunks, db.runs, db.experiments], async () => {
-    // An earlier interrupted attempt of the same run is kept under its own ID and linked (§7.6).
+    // An earlier interrupted attempt of the same run is kept under its own ID and linked.
     const prev = await db.runs.get(result.runId);
     let retryOf: string | undefined;
     if (prev && prev.status !== 'completed') {
@@ -358,7 +358,7 @@ export async function markInterrupted() {
   await db.experiments.where('status').equals('running').modify({ status: 'interrupted' });
 }
 
-// ---- Learning progress and assessments (§3.2, §3.7). Local, formative, not tamper-proof. ----
+// ---- Learning progress and assessments. Local, formative, not tamper-proof. ----
 
 export async function getProgress(id: string): Promise<ProgressRecord | undefined> {
   try {
@@ -382,7 +382,7 @@ export async function latestAssessment(challengeId: string) {
   return (await db.assessments.where('challengeId').equals(challengeId).sortBy('createdAt')).pop();
 }
 
-// ---- Comparisons (§3.6) ----
+// ---- Comparisons ----
 
 export async function latestComparison(a: string, b: string) {
   const list = await db.comparisons
@@ -397,7 +397,7 @@ export async function putComparison(c: Omit<ComparisonRecord, 'updatedAt'>) {
   await db.comparisons.put({ ...c, updatedAt: now() });
 }
 
-// ---- Revisions and branching (§3.4 history and branching, §8.2) ----
+// ---- Revisions and branching ----
 
 export async function listRevisions(projectId: string) {
   return (await db.revisions.where('projectId').equals(projectId).toArray()).sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1));
@@ -417,16 +417,16 @@ export async function projectExperiments(projectId: string) {
   return (await db.experiments.where('projectId').equals(projectId).toArray()).sort((a, b) => (a.updatedAt < b.updatedAt ? 1 : -1));
 }
 
-/** Plain-language explanation of a storage failure (§8.4, INT-05, INT-06). */
+/** Plain-language explanation of a storage failure. */
 export function describeStorageError(e: unknown): string {
   const err = e as { name?: string; message?: string; inner?: { name?: string } };
   const name = err?.name === 'DatabaseClosedError' || err?.name === 'OpenFailedError' ? (err.inner?.name ?? err.name) : err?.name;
   if (newerDatabaseVersion !== null || name === 'VersionError')
-    return `This browser holds data from a newer version of CA Studio. This version reads database versions up to ${DB_VERSION} and will not change newer data. Open the newer version of the app, or export your work there.`;
+    return `This browser holds data from a newer version of Cellular Automata Lab. This version reads database versions up to ${DB_VERSION} and will not change newer data. Open the newer version of the app, or export your work there.`;
   if (name === 'QuotaExceededError')
     return 'Browser storage is full. Your work is still open in this tab: export it now, or delete old projects or experiments to free space. Nothing was deleted automatically.';
   if (name === 'VersionError')
-    return `This browser holds data from a newer version of CA Studio. This version reads database versions up to ${DB_VERSION} and will not change newer data. Open the newer version of the app, or export your work there.`;
+    return `This browser holds data from a newer version of Cellular Automata Lab. This version reads database versions up to ${DB_VERSION} and will not change newer data. Open the newer version of the app, or export your work there.`;
   if (name === 'InvalidStateError' || name === 'SecurityError' || name === 'MissingAPIError')
     return 'Browser storage is unavailable (for example in some private windows). You can still work, but nothing is saved: use Export to keep your work.';
   return err?.message ?? String(e);

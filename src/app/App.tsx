@@ -18,7 +18,7 @@ import { ThemeProvider, useTheme } from './theme';
 
 function Shell() {
   const route = useRoute();
-  // Workers do not survive a reload: any experiment still marked running was interrupted (§8.4 recovery).
+  // Workers do not survive a reload: any experiment still marked running was interrupted.
   useEffect(() => {
     void markInterrupted().catch(() => {});
   }, []);
@@ -42,7 +42,7 @@ function Shell() {
             <BrandMark />
           </span>
           <span className="wordmark">
-            <span style={{ display: 'block', fontSize: 15, fontWeight: 650 }}>CA Studio</span>
+            <span style={{ display: 'block', fontSize: 15, fontWeight: 650 }}>Cellular Automata Lab</span>
             <span style={{ display: 'block', fontSize: 11, color: 'var(--text-subtle)' }}>Modelling &amp; Simulation</span>
           </span>
         </div>
@@ -83,7 +83,7 @@ function Shell() {
       <main id="main" className="main" tabIndex={-1}>
         {update.ready && (
           <div className="update-banner" role="status">
-            A new version of CA Studio is ready. Pause running simulations and let saving finish, then
+            A new version of Cellular Automata Lab is ready. Pause running simulations and let saving finish, then
             <button className="btn btn-sm btn-primary" onClick={update.apply}>
               Reload to update
             </button>

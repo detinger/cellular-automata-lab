@@ -1,4 +1,4 @@
-// Experiment exports (PLAN.md §3.5 results and exports, §8.5): raw metrics CSV, experiment JSON
+// Experiment exports: raw metrics CSV, experiment JSON
 // package (.ca-experiment.json) and a Markdown report. Charts are reconstructible from these files.
 import { ENGINE_VERSION } from '../domain/contracts/model';
 import { fromSpec } from '../domain/model/convert';

@@ -1,4 +1,4 @@
-// History replay (PLAN.md §3.4 Scrub history, §7.6): jump to an exact generation by replaying from
+// History replay: jump to an exact generation by replaying from
 // the nearest retained checkpoint. Rules are not reversible; going back means recomputing forward.
 import { useEffect, useState } from 'react';
 import { ChevronLeft, History } from 'lucide-react';

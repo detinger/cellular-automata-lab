@@ -1,4 +1,4 @@
-// A guided challenge (PLAN.md §3.7): task, the student's project, questions, explainable predicate
+// A guided challenge: task, the student's project, questions, explainable predicate
 // results, progressive hints, and a reflection with its rubric. Results are formative and local.
 import { useEffect, useState } from 'react';
 import { ArrowRight, Check, Lightbulb, Play, X } from 'lucide-react';

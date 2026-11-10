@@ -1,6 +1,6 @@
 # Instructor guide
 
-Cellular Automata Studio runs entirely in the student's browser: no accounts, no server, no grading backend. Students submit files they export.
+Cellular Automata Lab runs entirely in the student's browser: no accounts, no server, no grading backend. Students submit files they export.
 
 ## Course path (about 6 × 90 minutes)
 

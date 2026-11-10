@@ -1,4 +1,4 @@
-// Experiment definitions, validation, run manifests and workload estimates (PLAN.md §3.5, §7.5, §9.4).
+// Experiment definitions, validation, run manifests and workload estimates.
 // An experiment freezes one model revision; every run's concrete model and seed strings are derived
 // deterministically, so execution order or concurrency can never change a run's outputs (REP-05).
 import type { Model, ModelSpec } from '../contracts/model';
@@ -69,7 +69,7 @@ export interface ExperimentDefinition {
   design: 'independent' | 'paired';
   /**
    * Identifier used in seed derivation instead of `id`. Two experiments of a paired comparison
-   * share a scope so replicate i draws the same streams on both sides (§3.6, §7.5).
+   * share a scope so replicate i draws the same streams on both sides.
    */
   seedScope?: string;
   horizon: number;
@@ -340,7 +340,7 @@ export function validateExperiment(def: ExperimentDefinition): ValidationIssue[]
     );
   if ((stochastic || variesInit) && def.replicates === 1)
     add('recommendation', 'EDU_ONE_REPLICATE', '/replicates', 'One run of a random model cannot tell you how much the result varies.', 'Add replicates.');
-  // Stop policies must match the family and boundary (§7.4, §7.7).
+  // Stop policies must match the family and boundary.
   const s = def.stop;
   if (s.kind === 'first-no-fire' && base.rule.id !== 'forest-fire/v1')
     add('error', 'EXP_STOP_FAMILY', '/stop', '“First no-fire generation” applies to forest fire only.');

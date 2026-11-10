@@ -1,4 +1,4 @@
-// PLAN.md §9.2 STAT-01–STAT-08.
+// Run-level statistics fixtures STAT-01–STAT-08.
 import { describe, expect, it } from 'vitest';
 import { kaplanMeierMedian, relativeChange, summarize, summarizeEvents, tCdf, tQuantile } from '../../src/domain/stats/summary';
 import { histogramEntropy } from '../../src/domain/metrics/basic';

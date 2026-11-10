@@ -1,6 +1,6 @@
 # Performance results
 
-Recorded 2026-11-10 (PLAN.md §9.4). These are measurements on one machine, not guarantees.
+Recorded 2026-11-10. These are measurements on one machine, not guarantees.
 
 **Device:** Apple M1 MacBook (8 logical CPUs, 8 GiB RAM), macOS 27.2.1. Node 26.13.0. Chrome 158 (stable) driven by Playwright 1.65, viewport 1440 × 900. CPU worker + Canvas 2D backend only; no GPU path exists.
 
@@ -8,7 +8,7 @@ Recorded 2026-11-10 (PLAN.md §9.4). These are measurements on one machine, not 
 
 Workload: Life B3/S23, 256 × 256, periodic boundary, random 30% alive, basic metrics on, no cycle search, default history settings. Reproduce with `PERF=1 PW_CHANNEL=chrome npx playwright test tests/e2e/perf.spec.ts` (writes `test-results/perf-<browser>.json`).
 
-| Target (§9.4) | Result | Status |
+| Target | Result | Status |
 |---|---|---|
 | ≥ 30 generations/s for 30 s at 256² (30 requested) | 29.93 gen/s achieved over 30 s | pass (the scheduler paces to the requested rate) |
 | ≥ 30 displayed frames/s at 256² | 51.2 lattice draws/s (includes hover redraws) | pass |
@@ -19,7 +19,7 @@ Workload: Life B3/S23, 256 × 256, periodic boundary, random 30% alive, basic me
 
 ## Engine throughput (single thread, Node)
 
-`npm run bench` — the same engine code the worker runs. Lattice sizes from §9.4 dense-grid scaling.
+`npm run bench` — the same engine code the worker runs. Lattice sizes 128² to 1024².
 
 | Rule | Lattice | Generations/s | Cell updates/s |
 |---|---|---:|---:|
@@ -54,7 +54,7 @@ At 1024 × 1024 every family exceeds 48 generations/s on this machine, so all ad
 
 - **Bundle size:** the first-load JavaScript was 1,093 kB (322 kB gzip). Lazy-loading the workspace, experiment, comparison and learning pages cut it to 444 kB (131 kB gzip).
 - **Engine:** Life uses a padded buffer and an 18-entry lookup table; multistate families use precomputed neighbor offsets; count tables compile to a dense lookup (or a map above 4 M entries).
-- **PixiJS** was not evaluated further: Canvas 2D already meets every rendering target above, so a second renderer is not justified (PLAN.md §4.6).
+- **PixiJS** was not evaluated further: Canvas 2D already meets every rendering target above, so a second renderer is not justified.
 
 ## Not measured
 

@@ -1,4 +1,4 @@
-// Service worker registration and controlled updates (PLAN.md §8.4). Production builds only.
+// Service worker registration and controlled updates. Production builds only.
 import { useEffect, useState } from 'react';
 
 let waiting: ServiceWorker | null = null;

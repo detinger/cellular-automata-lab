@@ -1,4 +1,4 @@
-// Engine throughput benchmark (PLAN.md §9.4). Bundled and run by scripts/bench.mjs.
+// Engine throughput benchmark. Bundled and run by scripts/bench.mjs.
 import { createEngine } from '../src/domain/engine/engine';
 import { randomInitialize } from '../src/domain/random/seeded';
 import { familyModel } from '../src/data/presets';

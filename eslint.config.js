@@ -1,4 +1,4 @@
-// Lint configuration (PLAN.md Phase 0: linting and formatting). Run with `npm run lint`.
+// Lint configuration. Run with `npm run lint`.
 import js from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import reactHooks from 'eslint-plugin-react-hooks';

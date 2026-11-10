@@ -19,7 +19,7 @@ const engine = (id: string) => {
 };
 const ctx = (model: Model, over: Partial<ChallengeContext> = {}): ChallengeContext => ({ model, seed: '1', experiments: [], answers: {}, ...over });
 
-describe('lesson inventory (PLAN.md §3.2)', () => {
+describe('lesson inventory', () => {
   it('has twelve lessons over six levels, each with all eight parts', () => {
     expect(LESSONS).toHaveLength(12);
     expect(new Set(LESSONS.map((l) => l.level))).toEqual(new Set([1, 2, 3, 4, 5, 6]));
@@ -155,7 +155,7 @@ describe('lesson claims', () => {
   });
 });
 
-describe('challenges (PLAN.md §3.7)', () => {
+describe('challenges', () => {
   it('there are ten challenges CA-01 … CA-10 with hints and rubrics', () => {
     expect(CHALLENGES.map((c) => c.id)).toEqual(Array.from({ length: 10 }, (_, i) => `CA-${String(i + 1).padStart(2, '0')}`));
     for (const c of CHALLENGES) {

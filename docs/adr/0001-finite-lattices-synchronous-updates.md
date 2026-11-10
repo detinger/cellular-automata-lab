@@ -1,6 +1,6 @@
 # ADR 0001: Finite lattices and synchronous updates
 
-**Status:** accepted (Phase 0)
+**Status:** accepted
 
 ## Decision
 

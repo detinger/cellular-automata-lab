@@ -1,4 +1,4 @@
-// Canonical model hash (PLAN.md §8.2): semantics only — names, colors and viewport are excluded.
+// Canonical model hash: semantics only — names, colors and viewport are excluded.
 import type { Model, RuleSpec } from '../contracts/model';
 import { encodeGrid } from './encoding';
 

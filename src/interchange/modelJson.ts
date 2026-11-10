@@ -1,4 +1,4 @@
-// Model JSON import/export (PLAN.md §8.5). Import never executes or fetches anything in the data.
+// Model JSON import/export. Import never executes or fetches anything in the data.
 import type { Model, ModelSpec } from '../domain/contracts/model';
 import type { ValidationIssue } from '../domain/contracts/validation';
 import { hasErrors } from '../domain/contracts/validation';

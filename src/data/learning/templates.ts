@@ -1,4 +1,4 @@
-// Student investigation template (PLAN.md §3.7 CA-10, Phase 5 report templates). Plain Markdown.
+// Student investigation template. Plain Markdown.
 import { challengeById } from './challenges';
 
 export function investigationTemplate(): string {

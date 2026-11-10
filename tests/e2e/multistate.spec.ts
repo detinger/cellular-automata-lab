@@ -1,4 +1,4 @@
-// Phase 3: multistate and stochastic families, observed draws, checkpoint replay, family switching.
+// Multistate and stochastic families, observed draws, checkpoint replay, family switching.
 import { expect, test, type Page } from '@playwright/test';
 
 const openPreset = async (page: Page, name: string) => {

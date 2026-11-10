@@ -1,5 +1,5 @@
-// Small runnable example embedded in a lesson (PLAN.md §3.2). Uses the reference engine directly on
-// the main thread (demo lattices are small). Starts paused; playing is always an explicit choice (§9.5).
+// Small runnable example embedded in a lesson. Uses the reference engine directly on
+// the main thread (demo lattices are small). Starts paused; playing is always an explicit choice.
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Pause, Play, RotateCcw, SkipForward, StepForward } from 'lucide-react';
 import type { Model } from '../../domain/contracts/model';

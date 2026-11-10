@@ -1,4 +1,4 @@
-// One experiment: designer while a draft, then progress and results (PLAN.md §3.5).
+// One experiment: designer while a draft, then progress and results.
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { ArrowLeft, Copy, RotateCcw, Square, Trash2 } from 'lucide-react';
 import { db, deleteExperiment, loadRuns, createExperiment, updateExperiment, type ExperimentRecord } from '../../storage/db';

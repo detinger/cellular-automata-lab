@@ -1,5 +1,5 @@
-// Reference CPU engine (PLAN.md §7.1–§7.6). Synchronous, double-buffered, never updates in place.
-// Stochastic families consume exactly two transition draws per cell per generation, row-major (§7.5).
+// Reference CPU engine. Synchronous, double-buffered, never updates in place.
+// Stochastic families consume exactly two transition draws per cell per generation, row-major.
 import { ENGINE_VERSION, type Model, type Neighborhood } from '../contracts/model';
 import { capabilityFor } from '../contracts/capabilities';
 import { lifeLikeTable } from '../rules/lifeLike';
@@ -19,7 +19,7 @@ export class CapabilityError extends Error {
 
 export const CHECKPOINT_FORMAT = 'ca-studio-checkpoint/1';
 
-/** Self-consistent engine state between generations (§7.6). */
+/** Self-consistent engine state between generations. */
 export interface EngineCheckpoint {
   format: typeof CHECKPOINT_FORMAT;
   engineVersion: string;
@@ -82,7 +82,7 @@ function fillPadded(src: Uint8Array, w: number, h: number, padded: Uint8Array, p
   }
 }
 
-/** Neighbor offsets inside a padded buffer of row width `pw`, in the documented order (§7.2). */
+/** Neighbor offsets inside a padded buffer of row width `pw`, in the documented order. */
 export function paddedOffsets(n: Neighborhood, pw: number): Int32Array {
   return n === 'moore-r1' ? Int32Array.from([-pw - 1, -pw, -pw + 1, -1, 1, pw - 1, pw, pw + 1]) : Int32Array.from([-pw, -1, 1, pw]);
 }
@@ -276,7 +276,7 @@ class ElementaryEngine extends BaseEngine {
     m.counts[0] = w - live;
     m.changed = changed;
     m.activity = changed / w;
-    m.births = null; // births/deaths are defined for Life-like rules only (§7.8)
+    m.births = null; // births/deaths are defined for Life-like rules only
     m.deaths = null;
     m.flow = this.traffic ? moves / w : null;
     this.swap(m);
@@ -403,7 +403,7 @@ class MultiStateEngine extends BaseEngine {
           }
           case 'fire': {
             const u0 = stream!.next(),
-              u1 = stream!.next(); // always two draws (§7.5)
+              u1 = stream!.next(); // always two draws
             if (c === 2) v = 0;
             else if (c === 0) v = u0 < growth ? 1 : 0;
             else {

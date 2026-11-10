@@ -1,4 +1,4 @@
-// Worker message contract (PLAN.md §8.3). Discriminated unions with exhaustive handlers.
+// Worker message contract. Discriminated unions with exhaustive handlers.
 import type { Model } from './model';
 import type { GenerationMetrics } from '../metrics/basic';
 import type { EngineCheckpoint } from '../engine/engine';
@@ -31,12 +31,12 @@ export type WorkerCommand = Envelope &
 
 export type RunState = 'idle' | 'loading' | 'paused' | 'running' | 'replaying' | 'error';
 
-/** Full seed strings for the session's random streams (§7.5). Deterministic families ignore them. */
+/** Full seed strings for the session's random streams. Deterministic families ignore them. */
 export interface SeedSpec {
   transition: string;
 }
 
-/** Retained checkpoint history (§3.4): default every 100 generations within a 16 MiB ring. */
+/** Retained checkpoint history: default every 100 generations within a 16 MiB ring. */
 export interface HistoryInfo {
   interval: number;
   budgetBytes: number;
@@ -63,7 +63,7 @@ export interface FramePayload {
   achievedRate: number | null;
 }
 
-/** Per-generation measurement retention cap for one session (§9.4 sampled data). */
+/** Per-generation measurement retention cap for one session. */
 export const METRICS_CAP = 100_000;
 
 export type WorkerResponse = Envelope &

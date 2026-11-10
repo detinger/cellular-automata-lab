@@ -1,4 +1,4 @@
-// Random categorical initialization (PLAN.md §3.1, §7.5): one initialization draw per cell in
+// Random categorical initialization: one initialization draw per cell in
 // row-major order against cumulative probabilities in ascending state order. The generated cells
 // are stored with the model; the seed is shown so the fill can be reproduced.
 import { createStream, sessionSeed, type Stream } from './prng';

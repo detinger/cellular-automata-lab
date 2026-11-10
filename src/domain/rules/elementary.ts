@@ -1,4 +1,4 @@
-// elementary/v1 (PLAN.md §7.3): pattern = 4*left + 2*center + right; output = (ruleNumber >>> pattern) & 1.
+// elementary/v1: pattern = 4*left + 2*center + right; output = (ruleNumber >>> pattern) & 1.
 
 export const NAMED_ECA_RULES: Record<number, string> = {
   0: 'Rule 0 — everything dies',

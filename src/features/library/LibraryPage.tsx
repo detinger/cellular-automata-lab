@@ -84,7 +84,7 @@ export function LibraryPage() {
     <div className="page">
       <header className="page-header">
         <div>
-          <div className="eyebrow">Cellular Automata Studio</div>
+          <div className="eyebrow">Cellular Automata Lab</div>
           <h1>Models</h1>
           <p>
             Open a verified example or start from a blank 2D lattice or 1D elementary CA. Models are saved in this browser; export a <code>.ca.json</code> file

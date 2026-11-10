@@ -1,6 +1,6 @@
 # ADR 0002: Worker owns simulation state
 
-**Status:** accepted (Phase 1)
+**Status:** accepted
 
 ## Decision
 
@@ -10,6 +10,6 @@ Every command carries `protocolVersion`, `sessionId` and `requestId`. `LOAD` sta
 
 Playback is scheduled from wall-clock time: the target generation is `elapsed × rate`. The worker runs bounded batches of about 16 ms, then yields. If the requested rate can't be sustained, the anchor is reset and the achieved rate is reported.
 
-## Not yet implemented (contract reserved)
+## Later additions
 
-`INSPECT`, `CHECKPOINT` and `CANCEL` are not implemented yet. Transition explanations currently call the pure `domain/rules/explain.ts` on the main thread with the displayed generation. They use the same rule table as the engine, so there is no second copy of the rule logic. Stochastic families (Phase 3) will need explanations served by the worker, so that recorded random draws are reported without consuming new ones.
+`SEEK` (replay to a generation from the nearest checkpoint), `INSPECT` (observed transition with the recorded random draws, replayed from the stream state saved at the start of the last step, so the live stream is never advanced), `CHECKPOINT` and `CANCEL` were added with the stochastic families. Deterministic explanations for the next step still run on the main thread from the displayed generation, using the same rule code as the engine.

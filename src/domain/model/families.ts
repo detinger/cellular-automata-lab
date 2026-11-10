@@ -1,4 +1,4 @@
-// Family defaults and conversion between 2D families (PLAN.md §3.1). Switching family keeps the
+// Family defaults and conversion between 2D families. Switching family keeps the
 // lattice and maps out-of-range cells to state 0; the editor reports how many cells changed.
 import type { Boundary, CountClause, Model, RuleSpec } from '../contracts/model';
 

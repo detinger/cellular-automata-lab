@@ -1,4 +1,4 @@
-// ECA fixtures SIM-07..SIM-12 (PLAN.md §9.1). Expected values are hand-calculated or independently enumerated.
+// ECA fixtures SIM-07..SIM-12. Expected values are hand-calculated or independently enumerated.
 import { describe, expect, it } from 'vitest';
 import { createEngine } from '../../src/domain/engine/engine';
 import type { Boundary, Model } from '../../src/domain/contracts/model';

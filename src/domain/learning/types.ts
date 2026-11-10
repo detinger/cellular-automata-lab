@@ -1,4 +1,4 @@
-// Lesson and challenge contracts (PLAN.md §3.2, §3.7). Content is plain data plus pure predicates
+// Lesson and challenge contracts. Content is plain data plus pure predicates
 // evaluated with the same headless engine as the app. Text is rendered as plain text, never HTML.
 import type { Model } from '../contracts/model';
 import type { ExperimentDefinition } from '../experiments/experiment';

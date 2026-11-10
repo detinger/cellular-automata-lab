@@ -1,4 +1,4 @@
-// Typed client for the simulation worker. Ignores stale sessions and out-of-order frames (§7.6, INT-07).
+// Typed client for the simulation worker. Ignores stale sessions and out-of-order frames.
 import type { Model } from '../domain/contracts/model';
 import type { GenerationMetrics } from '../domain/metrics/basic';
 import {

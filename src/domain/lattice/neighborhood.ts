@@ -1,4 +1,4 @@
-// Neighborhood offsets and boundary sampling (PLAN.md §7.2).
+// Neighborhood offsets and boundary sampling.
 import type { Boundary } from '../contracts/model';
 
 /** Moore radius 1, center excluded, in the documented order. */

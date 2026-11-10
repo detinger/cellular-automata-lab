@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react';
 import { defineConfig, type Plugin } from 'vite';
 
 /**
- * Writes precache.json for the service worker (PLAN.md §8.4 offline caching): every emitted asset plus
+ * Writes precache.json for the service worker: every emitted asset plus
  * the static files in public/, under a build ID derived from the emitted file names (content-hashed).
  */
 function precacheManifest(): Plugin {

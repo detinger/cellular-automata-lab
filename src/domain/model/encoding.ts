@@ -18,7 +18,7 @@ export function decodeGrid(grid: EncodedGrid): Uint8Array {
   return out;
 }
 
-/** Exact decoded length of a base64 string, computed before allocating (§8.5 import limits). */
+/** Exact decoded length of a base64 string, computed before allocating. */
 export function base64DecodedLength(data: string): number | null {
   if (data.length % 4 !== 0 || !/^[A-Za-z0-9+/]*={0,2}$/.test(data)) return null;
   const padding = data.endsWith('==') ? 2 : data.endsWith('=') ? 1 : 0;

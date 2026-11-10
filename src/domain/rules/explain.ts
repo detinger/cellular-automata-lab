@@ -1,4 +1,4 @@
-// Transition explanations (PLAN.md §3.1 inspector, §3.4). Uses the same table as the engine.
+// Transition explanations. Uses the same table as the engine.
 import type { Model } from '../contracts/model';
 import { MOORE_R1, sampleNeighbor, type Sample } from '../lattice/neighborhood';
 import { formatLifeLike, lifeLikeTable } from './lifeLike';

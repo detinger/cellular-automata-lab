@@ -1,4 +1,4 @@
-// PLAN.md §9.3 E2E-02: finish a lesson and a challenge with the keyboard; feedback is meaningful and progress persists.
+// E2E-02: finish a lesson and a challenge with the keyboard; feedback is meaningful and progress persists.
 import { expect, test } from '@playwright/test';
 
 test('E2E-02: lesson and challenge completed with the keyboard only', async ({ page }) => {

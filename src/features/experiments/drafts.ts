@@ -1,4 +1,4 @@
-// Sensible starting experiment for a model (PLAN.md §3.5). Students edit every field before running.
+// Sensible starting experiment for a model. Students edit every field before running.
 import type { Model } from '../../domain/contracts/model';
 import { toSpec } from '../../domain/model/convert';
 import { isStochasticRule } from '../../domain/engine/engine';

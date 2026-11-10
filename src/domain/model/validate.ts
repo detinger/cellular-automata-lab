@@ -1,4 +1,4 @@
-// Structural, semantic and capability validation of a decoded model (PLAN.md §3.3, §8.1).
+// Structural, semantic and capability validation of a decoded model.
 import type { Model } from '../contracts/model';
 import { LIMITS } from '../contracts/model';
 import { capabilityFor } from '../contracts/capabilities';

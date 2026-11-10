@@ -1,4 +1,4 @@
-// Engine correctness fixtures SIM-01..SIM-06 (PLAN.md §9.1). Expected values are hand-calculated.
+// Engine correctness fixtures SIM-01..SIM-06. Expected values are hand-calculated.
 import { describe, expect, it } from 'vitest';
 import { createEngine, CapabilityError } from '../../src/domain/engine/engine';
 import { life, live, naiveStep } from './helpers';

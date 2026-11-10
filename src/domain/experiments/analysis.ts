@@ -1,4 +1,4 @@
-// Configuration-level summaries (PLAN.md §3.5). Shared by the results view, the Markdown report and
+// Configuration-level summaries. Shared by the results view, the Markdown report and
 // tests, so displayed and exported numbers always come from the same computation (E2E-06).
 import { summarize, summarizeEvents, type Summary } from '../stats/summary';
 import { configurations, type ExperimentDefinition } from './experiment';

@@ -1,4 +1,4 @@
-// A lesson (PLAN.md §3.2): objective, explanation, runnable example, prediction, typical mistake,
+// A lesson: objective, explanation, runnable example, prediction, typical mistake,
 // exercise, knowledge check and reflection. Completion needs the prediction, a correct check and a
 // written reflection — time spent or clicks alone never count as mastery.
 import { useEffect, useMemo, useState } from 'react';

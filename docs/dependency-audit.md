@@ -33,7 +33,7 @@ Recorded 2026-11-10 from `package-lock.json`. Versions are pinned exactly in `pa
 | prettier | 3.9.10 | MIT |
 | globals | 17.13.0 | MIT |
 
-Lint and format tools added in Phase 6 were pinned to releases at least two weeks old at install time (2026-11-10).
+Lint and format tools were pinned to releases at least two weeks old at install time (2026-11-10).
 
 ## Runtime requirements
 
@@ -43,16 +43,16 @@ Lint and format tools added in Phase 6 were pinned to releases at least two week
 
 ## Removed from the AI Studio scaffold
 
-`@google/genai`, `express`, `dotenv`, `motion` and `react-syntax-highlighter` were removed. The application needs no AI service or backend, and it never executes user-supplied JavaScript (PLAN.md §1.3, §7.3).
+`@google/genai`, `express`, `dotenv`, `motion` and `react-syntax-highlighter` were removed. The application needs no AI service or backend, and it never executes user-supplied JavaScript.
 
 ## Bundled content provenance and attribution
 
 All bundled content was written for this app; nothing is copied from third-party sites.
 
 - **Patterns** (block, blinker, toad, beacon, pulsar, glider, lightweight spaceship, R-pentomino, diehard, acorn, Gosper glider gun, HighLife replicator) are well-known Life patterns; their names and RLE are common knowledge in the Life community and documented, for example, in Golly's pattern collection and LifeWiki. Every behavior the app claims about them (periods, translations, populations, the replicator's copies) is verified by tests in `tests/unit/patterns.test.ts` and `tests/unit/presets.test.ts`, not taken on trust.
-- **B/S notation and the named rules** (Life B3/S23, HighLife B36/S23, Seeds B2/S) follow Golly's documentation (PLAN.md §11).
-- **Elementary rule numbering** follows Wolfram's convention (MathWorld, PLAN.md §11). The remark about Rule 30 and randomness cites *A New Kind of Science* (Wolfram, 2002) and is labeled as not tested by the app.
-- **Brian's Brain** (Brian Silverman), **cyclic CA** (Griffeath and coworkers), **forest fire** (Drossel–Schwabl style) and **spatial SIR** are standard teaching models; the app's exact versions are defined in PLAN.md §7.3–§7.4 and documented in `docs/capabilities.md`.
+- **B/S notation and the named rules** (Life B3/S23, HighLife B36/S23, Seeds B2/S) follow Golly's documentation.
+- **Elementary rule numbering** follows Wolfram's convention (MathWorld). The remark about Rule 30 and randomness cites *A New Kind of Science* (Wolfram, 2002) and is labeled as not tested by the app.
+- **Brian's Brain** (Brian Silverman), **cyclic CA** (Griffeath and coworkers), **forest fire** (Drossel–Schwabl style) and **spatial SIR** are standard teaching models; the app's exact versions are documented in `docs/capabilities.md`.
 - **Lessons, challenges, hints and rubrics** are original text. Factual claims about demo models are checked in `tests/unit/learning.test.ts`.
 - **Fonts:** Inter and JetBrains Mono, both SIL Open Font License 1.1, self-hosted via Fontsource.
 - **Icons:** Lucide, ISC license.

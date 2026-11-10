@@ -1,4 +1,4 @@
-// Phase 2 editing: pattern stamps with transforms, seeded random fill, region selection, RLE import/export.
+// Editing: pattern stamps with transforms, seeded random fill, region selection, RLE import/export.
 import { expect, test, type Page } from '@playwright/test';
 
 const alive = (page: Page) => page.locator('.kpi').first().locator('.kpi-value');

@@ -1,4 +1,4 @@
-// Versioned model contracts (PLAN.md §8.1). Pure types: no browser or React imports.
+// Versioned model contracts. Pure types: no browser or React imports.
 
 export type Neighborhood = 'moore-r1' | 'von-neumann-r1';
 
@@ -62,7 +62,7 @@ export interface Model {
   initial: Uint8Array;
 }
 
-/** Lattice limits (§7.1). */
+/** Lattice limits. */
 export const LIMITS = {
   minSize2d: 3,
   maxSize2d: 1024,
@@ -80,5 +80,5 @@ export const ENGINE_VERSION = 'ca-studio-engine/1.0.0';
 /** State value used in display buffers for "no data" (e.g. spacetime rows not yet computed). Never a model state. */
 export const VOID_STATE = 255;
 
-/** Rows retained in a 1D spacetime view: roughly square, bounded to 512 KiB per snapshot (§7.3, §9.4). */
+/** Rows retained in a 1D spacetime view: roughly square, bounded to 512 KiB per snapshot. */
 export const spacetimeRows = (width: number) => Math.max(64, Math.min(width, 1024, Math.floor(524288 / width)));

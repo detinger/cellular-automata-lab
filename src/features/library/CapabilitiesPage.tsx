@@ -1,4 +1,4 @@
-// Supported capabilities and known limitations (PLAN.md Phase 6). Mirrors docs/capabilities.md.
+// Supported capabilities and known limitations. Mirrors docs/capabilities.md.
 import { FAMILY_CAPABILITIES } from '../../domain/contracts/capabilities';
 import { ENGINE_VERSION, LIMITS } from '../../domain/contracts/model';
 import { PRNG_ADAPTER } from '../../domain/random/prng';

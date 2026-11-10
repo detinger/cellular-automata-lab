@@ -1,5 +1,5 @@
 /* global self, caches, fetch, URL, Response */
-// Offline support (PLAN.md §8.4). Caches immutable application assets only — never user data, which
+// Offline support. Caches immutable application assets only — never user data, which
 // lives in IndexedDB. A new version installs in the background and waits; the page asks the user to
 // reload when they are ready (after pausing and saving), then sends SKIP_WAITING.
 const PREFIX = 'ca-studio-app-';

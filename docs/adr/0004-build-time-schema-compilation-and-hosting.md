@@ -1,6 +1,6 @@
 # ADR 0004: Build-time schema compilation; static hosting on Netlify and Railway
 
-**Status:** accepted (Phase 0)
+**Status:** accepted
 
 ## Schema compilation
 

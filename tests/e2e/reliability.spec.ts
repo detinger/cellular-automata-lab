@@ -1,4 +1,4 @@
-// PLAN.md §9.3 INT-05 (migration), INT-06 (storage full), E2E-07 (offline after caching).
+// INT-05 (migration), INT-06 (storage full), E2E-07 (offline after caching).
 import { readFileSync } from 'node:fs';
 import { expect, test } from '@playwright/test';
 
@@ -86,7 +86,7 @@ test('INT-05: data from a newer app version is refused, not modified', async ({ 
     });
   });
   await page.goto('/');
-  await expect(page.getByText(/data from a newer version of CA Studio/)).toBeVisible();
+  await expect(page.getByText(/data from a newer version of Cellular Automata Lab/)).toBeVisible();
   const stores = await page.evaluate(
     () =>
       new Promise((res) => {

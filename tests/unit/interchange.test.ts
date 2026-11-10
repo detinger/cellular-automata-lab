@@ -1,4 +1,4 @@
-// Import rejection fixtures and JSON round trip (PLAN.md §8.1, INT-01, INT-04).
+// Import rejection fixtures and JSON round trip.
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { exportModelJson, importModelJson } from '../../src/interchange/modelJson';
@@ -17,7 +17,7 @@ const mutate = (fn: (d: any) => void) => {
 };
 
 describe('model JSON import', () => {
-  it('imports the §8.1 blinker fixture with live cells at (1,2),(2,2),(3,2)', () => {
+  it('imports the 5 × 5 blinker fixture with live cells at (1,2),(2,2),(3,2)', () => {
     const r = importModelJson(fixture);
     expect(r.ok).toBe(true);
     if (!r.ok) return;

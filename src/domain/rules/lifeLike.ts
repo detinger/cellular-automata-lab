@@ -1,4 +1,4 @@
-// life-like/v1 (PLAN.md §7.3): outer-totalistic binary rule over the Moore radius-1 neighborhood.
+// life-like/v1: outer-totalistic binary rule over the Moore radius-1 neighborhood.
 
 export interface LifeLikeRule {
   birth: number[];

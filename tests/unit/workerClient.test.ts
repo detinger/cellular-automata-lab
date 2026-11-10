@@ -1,4 +1,4 @@
-// PLAN.md §9.3 INT-07 (stale worker messages after a model switch) and INT-08 (worker error).
+// INT-07 (stale worker messages after a model switch) and INT-08 (worker error).
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { SimulationClient, type SimulationListener } from '../../src/workers/client';
 import { PROTOCOL_VERSION, type WorkerResponse } from '../../src/domain/contracts/worker';

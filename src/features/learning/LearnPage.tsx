@@ -1,4 +1,4 @@
-// Learning overview (PLAN.md §3.2 levels, §3.7 challenges) with local progress.
+// Learning overview with local progress.
 import { useEffect, useState } from 'react';
 import { GraduationCap } from 'lucide-react';
 import { LESSONS } from '../../data/learning/lessons';

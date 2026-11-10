@@ -1,4 +1,4 @@
-// Time-series analytics (PLAN.md §3.5, STYLE.md §8). Display decimation never changes exported data.
+// Time-series analytics. Display decimation never changes exported data.
 import { useMemo, useState } from 'react';
 import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { ChevronDown, ChevronUp, Download } from 'lucide-react';

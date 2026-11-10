@@ -1,5 +1,5 @@
 /// <reference lib="webworker" />
-// Batch experiment worker (PLAN.md §3.5, §7.6, §9.4): one worker, runs executed one at a time in
+// Batch experiment worker: one worker, runs executed one at a time in
 // bounded slices so progress and cancellation stay responsive. Run order never affects outputs.
 import { planRuns, type ExperimentDefinition } from '../domain/experiments/experiment';
 import { RunExecutor, gridHash, type RunSnapshot } from '../domain/experiments/execute';

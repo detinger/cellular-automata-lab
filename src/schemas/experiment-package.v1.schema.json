@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://ca-studio.local/schemas/experiment-package.v1.json",
-  "title": "Cellular Automata Studio experiment package (.ca-experiment.json), schema version 1",
+  "title": "Cellular Automata Lab experiment package (.ca-experiment.json), schema version 1",
   "description": "Export format only: definition, run manifest, run-level results and summaries. Sampled rows are in the metrics CSV unless samples were requested.",
   "type": "object",
   "required": ["format", "schemaVersion", "exportedAt", "status", "engineVersion", "prngAdapter", "definition", "manifest", "runs", "summaries", "conclusion"],

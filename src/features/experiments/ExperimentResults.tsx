@@ -1,4 +1,4 @@
-// Experiment results (PLAN.md §3.5): progress, configuration summaries with labeled uncertainty,
+// Experiment results: progress, configuration summaries with labeled uncertainty,
 // censoring, response and trajectory charts with table alternatives, run manifest and exports.
 import { useMemo, useState } from 'react';
 import { CartesianGrid, ComposedChart, ErrorBar, Line, LineChart, ResponsiveContainer, Scatter, Tooltip, XAxis, YAxis } from 'recharts';

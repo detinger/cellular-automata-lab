@@ -1,4 +1,4 @@
-// Editor undo/redo over whole-model snapshots with a byte budget. Separate from engine reset (§8.3).
+// Editor undo/redo over whole-model snapshots with a byte budget. Separate from engine reset.
 import type { Model } from '../../domain/contracts/model';
 
 const BUDGET_BYTES = 32 * 1024 * 1024;
@@ -33,7 +33,7 @@ export class EditHistory {
   }
 }
 
-/** Centered crop/pad with state 0 (§3.1). Returns the new grid and how many nonzero cells were cropped. */
+/** Centered crop/pad with state 0. Returns the new grid and how many nonzero cells were cropped. */
 export function resizeCentered(cells: Uint8Array, w: number, h: number, nw: number, nh: number) {
   const out = new Uint8Array(nw * nh);
   const dx = Math.floor((nw - w) / 2);

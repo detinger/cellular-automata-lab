@@ -40,7 +40,7 @@ export const PATTERNS: readonly Pattern[] = DEFS.map((d) => {
   return { id: d.id, name: d.name, description: d.description, width: r.pattern.width, height: r.pattern.height, cells: r.pattern.cells };
 });
 
-/** Pattern transformations change cells, never the rule (§3.1). */
+/** Pattern transformations change cells, never the rule. */
 export function rotateCW(p: Pattern): Pattern {
   const out = new Uint8Array(p.cells.length);
   for (let y = 0; y < p.height; y++) for (let x = 0; x < p.width; x++) out[x * p.height + (p.height - 1 - y)] = p.cells[y * p.width + x];

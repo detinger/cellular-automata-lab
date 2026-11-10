@@ -1,6 +1,6 @@
 # ADR 0007: Offline caching and controlled updates
 
-**Status:** accepted (Phase 6, 2026-11-10)
+**Status:** accepted (2026-11-10)
 
 ## Decision
 

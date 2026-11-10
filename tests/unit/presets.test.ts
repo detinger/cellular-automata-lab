@@ -1,4 +1,4 @@
-// Presets are checked against their stated behavior; names alone are not evidence (PLAN.md §3.2).
+// Presets are checked against their stated behavior; names alone are not evidence.
 import { describe, expect, it } from 'vitest';
 import { presetById, PRESETS } from '../../src/data/presets';
 import { createEngine } from '../../src/domain/engine/engine';

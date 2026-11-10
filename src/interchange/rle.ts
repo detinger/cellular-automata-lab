@@ -1,4 +1,4 @@
-// Binary RLE subset (PLAN.md §8.5): `#` comments, `x = m, y = n[, rule = B…/S…]` header, run counts,
+// Binary RLE subset: `#` comments, `x = m, y = n[, rule = B…/S…]` header, run counts,
 // `b` dead, `o` live, `$` row advance, required `!` terminator. Stricter than some tools by design.
 import { LIMITS, type Model } from '../domain/contracts/model';
 import { formatLifeLike, parseLifeLike, type LifeLikeRule } from '../domain/rules/lifeLike';

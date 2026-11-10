@@ -1,4 +1,4 @@
-// Run-level statistics (PLAN.md §3.5 scientific correctness, §7.8). Uncertainty is computed across
+// Run-level statistics. Uncertainty is computed across
 // independent run outcomes only, never across correlated generations of one run.
 
 export interface Summary {
@@ -141,7 +141,7 @@ export function tQuantile(p: number, df: number): number {
 
 // ---- Comparisons and censored outcomes ----
 
-/** (alternative − baseline) / |baseline| × 100; N/A (null) when the baseline is zero (§3.6). */
+/** (alternative − baseline) / |baseline| × 100; N/A (null) when the baseline is zero. */
 export function relativeChange(baseline: number, alternative: number): { absolute: number; percent: number | null } {
   return { absolute: alternative - baseline, percent: baseline === 0 ? null : ((alternative - baseline) / Math.abs(baseline)) * 100 };
 }

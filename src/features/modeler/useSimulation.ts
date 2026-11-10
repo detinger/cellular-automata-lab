@@ -1,5 +1,5 @@
 // Bridges the worker client to React. High-frequency frames stay outside React state;
-// status updates are throttled while running (PLAN.md §4.2 state layer).
+// status updates are throttled while running.
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { Model } from '../../domain/contracts/model';
 import type { FramePayload, HistoryInfo, RunState, SeedSpec } from '../../domain/contracts/worker';

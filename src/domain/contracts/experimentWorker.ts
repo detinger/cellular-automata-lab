@@ -1,4 +1,4 @@
-// Experiment worker messages (PLAN.md §8.3 pattern): discriminated unions, job IDs reject stale replies.
+// Experiment worker messages: discriminated unions, job IDs reject stale replies.
 import type { ExperimentDefinition } from '../experiments/experiment';
 import type { RunResult, RunSnapshot } from '../experiments/execute';
 

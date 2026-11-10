@@ -1,4 +1,4 @@
-// Baseline vs. alternative (PLAN.md §3.6): changed assumptions, side-by-side runs with optional
+// Baseline vs. alternative: changed assumptions, side-by-side runs with optional
 // generation lock and independent pan/zoom, Hamming distance when meaningful, and a replicated
 // comparison (independent or paired) with labeled uncertainty and a written interpretation.
 import { useEffect, useMemo, useRef, useState } from 'react';

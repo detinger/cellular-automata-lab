@@ -240,7 +240,7 @@ export function GridCanvas(props: Props) {
         return;
       }
       const l = local(e);
-      // Clip to the finite lattice even on a torus: brushes never wrap (§3.1).
+      // Clip to the finite lattice even on a torus: brushes never wrap.
       const raw = { x: Math.floor((l.x - r.camera.offsetX) / r.camera.scale), y: Math.floor((l.y - r.camera.offsetY) / r.camera.scale) };
       const cell = cellAt(e);
       if (mode === 'select' && (raw.x !== selFrom.x || raw.y !== selFrom.y || selMoved)) {
@@ -311,7 +311,7 @@ export function GridCanvas(props: Props) {
     };
   }, []);
 
-  // Keyboard cursor: one focus target, arrows move the inspected cell, Enter toggles it (§9.5).
+  // Keyboard cursor: one focus target, arrows move the inspected cell, Enter toggles it.
   const onKeyDown = (e: React.KeyboardEvent) => {
     const p = propsRef.current;
     const cur = p.inspect ?? p.defaultCursor ?? { x: Math.floor(p.width / 2), y: Math.floor(p.height / 2) };

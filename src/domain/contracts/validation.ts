@@ -1,4 +1,4 @@
-// Validation issue contract (PLAN.md §3.3, §8.1).
+// Validation issue contract.
 
 export type Severity = 'error' | 'warning' | 'recommendation' | 'information';
 export type IssueCategory = 'schema' | 'structure' | 'semantics' | 'capability' | 'experiment' | 'educational';

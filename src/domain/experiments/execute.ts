@@ -1,4 +1,4 @@
-// Headless run execution (PLAN.md §3.5, §7.6–§7.8). Uses the same engine as the workspace.
+// Headless run execution. Uses the same engine as the workspace.
 // A run is advanced in bounded slices so a worker can report progress and honor cancellation.
 import { ENGINE_VERSION, type Model } from '../contracts/model';
 import { createEngine, type Engine, type EngineCheckpoint } from '../engine/engine';
@@ -101,7 +101,7 @@ export function concreteModel(def: ExperimentDefinition, spec: RunSpec): Model {
   return m;
 }
 
-/** Exact recurrence detection: hashes index candidates, byte equality confirms (§7.7). */
+/** Exact recurrence detection: hashes index candidates, byte equality confirms. */
 class RecurrenceDetector {
   private byHash = new Map<number, Array<{ generation: number; cells: Uint8Array }>>();
   private order: Array<{ hash: number; generation: number; bytes: number }> = [];
@@ -152,7 +152,7 @@ class RecurrenceDetector {
   }
 }
 
-/** Resumable snapshot of a partially executed run (recovery checkpoint, §8.4). */
+/** Resumable snapshot of a partially executed run. */
 export interface RunSnapshot {
   runId: string;
   checkpoint: EngineCheckpoint;
@@ -191,7 +191,7 @@ export class RunExecutor {
       this.samples = resume.samples.map((s) => ({ ...s, counts: [...s.counts] }));
       this.acc = { ...resume.acc };
       this.wallMs = resume.wallMs;
-      // A resumed recurrence search restarts its window (documented as a state-replay checkpoint, §7.6).
+      // A resumed recurrence search restarts its window.
     } else {
       this.observe(this.engine.metrics);
       this.detector?.check(0, this.engine.cells);

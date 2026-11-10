@@ -1,4 +1,4 @@
-// Left-panel editing sections: pattern stamps, region selection actions and seeded random fill (PLAN.md §3.1).
+// Left-panel editing sections: pattern stamps, region selection actions and seeded random fill.
 import { useRef, useState } from 'react';
 import { ClipboardPaste, Copy, Dices, FlipHorizontal2, PaintBucket, RotateCw, Scissors, Stamp, Upload, X, Eraser } from 'lucide-react';
 import { PATTERNS, flipHorizontal, rotateCW, type Pattern } from '../../data/patterns';

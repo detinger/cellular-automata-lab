@@ -1,4 +1,4 @@
-// Baseline vs. alternative comparison (PLAN.md §3.6): assumption diffs, compatibility of direct
+// Baseline vs. alternative comparison: assumption diffs, compatibility of direct
 // comparisons, Hamming distance and paired/independent outcome differences.
 import type { Model } from '../contracts/model';
 import { ruleSummary } from '../model/families';
@@ -90,7 +90,7 @@ export function compatibility(a: Model, b: Model): Compatibility {
   return { hamming, hammingReason, sameStates, paired, pairedReason, normalize: !sameSize };
 }
 
-/** Fraction of aligned sites with unequal states (§7.8). */
+/** Fraction of aligned sites with unequal states. */
 export function hamming(a: Uint8Array, b: Uint8Array): number {
   if (a.length !== b.length) throw new RangeError('Hamming distance needs aligned lattices of equal size.');
   let d = 0;

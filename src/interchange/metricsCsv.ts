@@ -1,4 +1,4 @@
-// Metrics CSV (PLAN.md §8.5): run ID, model hash, generation, metric columns, explicit missing values,
+// Metrics CSV: run ID, model hash, generation, metric columns, explicit missing values,
 // locale-independent numbers, and formula-safe text.
 import type { GenerationMetrics } from '../domain/metrics/basic';
 

@@ -1,6 +1,6 @@
 # ADR 0006: Experiment execution and persistence
 
-**Status:** accepted (Phase 4, 2026-11-10)
+**Status:** accepted (2026-11-10)
 
 ## Decision
 

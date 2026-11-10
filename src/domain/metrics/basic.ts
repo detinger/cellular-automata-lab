@@ -1,4 +1,4 @@
-// Basic per-generation metrics (PLAN.md §7.8).
+// Basic per-generation metrics.
 
 export interface GenerationMetrics {
   generation: number;

@@ -1,4 +1,4 @@
-// Experiment designer (PLAN.md §3.5 experiment configuration). Every field from the plan's list of
+// Experiment designer. Every field from the plan's list of
 // ten items is visible; validation and the workload estimate update as the student edits.
 import { useMemo } from 'react';
 import { CircleAlert, Plus, Play, Trash2, Dices } from 'lucide-react';

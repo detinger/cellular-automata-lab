@@ -1,4 +1,4 @@
-// PNG snapshot of one identified generation with a legend and caption (PLAN.md §8.5).
+// PNG snapshot of one identified generation with a legend and caption.
 // A picture is not a model: the caption says so, and the model file remains the resumable record.
 
 export interface PngCaption {

@@ -1,4 +1,4 @@
-// Cell inspector for every 2D family (PLAN.md §3.1, §3.4). Uses the same semantics as the engine.
+// Cell inspector for every 2D family. Uses the same semantics as the engine.
 // Deterministic families get the exact next state and clause; stochastic families get a probability
 // preview, and — for an observed step — the recorded draws, without consuming any random values.
 import type { Model, Neighborhood } from '../contracts/model';

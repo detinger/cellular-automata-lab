@@ -1,4 +1,4 @@
-// Versioned random-stream adapter (PLAN.md §7.5). Wraps an *instantiated* seedrandom generator;
+// Versioned random-stream adapter. Wraps an *instantiated* seedrandom generator;
 // never touches global Math.random. The adapter ID, library version and saved states are part of
 // run provenance, so changing any of them requires a new adapter version.
 import seedrandom from 'seedrandom';
@@ -40,11 +40,11 @@ export const isPrngState = (v: unknown): v is PrngState =>
 
 export type StreamKind = 'initialization' | 'transition';
 
-/** Independent-run seed string (§7.5). Stored verbatim in run metadata. */
+/** Independent-run seed string. Stored verbatim in run metadata. */
 export const independentSeed = (masterSeed: string, experimentId: string, configurationKey: string, replicateIndex: number, kind: StreamKind) =>
   JSON.stringify(['ca-studio-seed-v1', masterSeed, experimentId, configurationKey, replicateIndex, kind]);
 
-/** Paired-run seed string (§7.5): runs in the same pair group share both streams. */
+/** Paired-run seed string: runs in the same pair group share both streams. */
 export const pairedSeed = (masterSeed: string, experimentId: string, pairGroupId: string, replicateIndex: number, kind: StreamKind) =>
   JSON.stringify(['ca-studio-paired-v1', masterSeed, experimentId, pairGroupId, replicateIndex, kind]);
 

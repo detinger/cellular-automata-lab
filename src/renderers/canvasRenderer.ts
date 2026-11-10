@@ -1,4 +1,4 @@
-// Native Canvas 2D renderer (PLAN.md §4.6). Passive: it never changes simulation state.
+// Native Canvas 2D renderer. Passive: it never changes simulation state.
 
 export interface Camera {
   /** CSS pixels per cell. */

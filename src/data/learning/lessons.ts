@@ -1,4 +1,4 @@
-// Twelve lessons over six levels (PLAN.md §3.2). Every factual claim about a demo is checked in
+// Twelve lessons over six levels. Every factual claim about a demo is checked in
 // tests/unit/learning.test.ts against the engine; formal results from outside sources are named as such.
 import type { Lesson } from '../../domain/learning/types';
 import { ecaModel, familyModel, lifeModel, presetById, trafficPattern } from '../presets';

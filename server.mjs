@@ -93,7 +93,7 @@ const server = createServer(async (req, res) => {
 });
 
 server.listen(port, host, () => {
-  console.log(`Cellular Automata Studio serving ${root} on http://${host}:${port}`);
+  console.log(`Cellular Automata Lab serving ${root} on http://${host}:${port}`);
 });
 
 for (const signal of ['SIGTERM', 'SIGINT']) {

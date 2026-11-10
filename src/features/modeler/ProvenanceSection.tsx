@@ -1,4 +1,4 @@
-// Revisions, branching and result provenance (PLAN.md §3.4, §8.2). Every semantic change is a new
+// Revisions, branching and result provenance. Every semantic change is a new
 // revision with a parent link; experiments point at the exact revision and hash they froze.
 import { useEffect, useState } from 'react';
 import { GitBranch } from 'lucide-react';

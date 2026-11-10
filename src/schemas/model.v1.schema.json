@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://ca-studio.local/schemas/model.v1.json",
-  "title": "Cellular Automata Studio model, schema version 1",
+  "title": "Cellular Automata Lab model, schema version 1",
   "type": "object",
   "additionalProperties": false,
   "required": [

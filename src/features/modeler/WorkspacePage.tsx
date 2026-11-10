@@ -1,4 +1,4 @@
-// Phase 1 vertical slice: open → inspect rule → step → explain a cell → reset → edit → save → reload.
+// Modeling workspace: toolbar, model panels, lattice, inspector, measurements and history.
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
   ArrowLeft,
@@ -139,7 +139,7 @@ export function WorkspacePage({ projectId }: { projectId: string }) {
   const atZero = status.generation === 0;
   const canEdit = !!model && !running && (atZero || !executable);
 
-  // ---- Autosave (500 ms debounce, PLAN.md §8.4) ----
+  // ---- Autosave ----
   const saveNow = useCallback(
     async (m: Model, nm: string, reason: string) => {
       setSave({ kind: 'saving' });
@@ -366,7 +366,7 @@ export function WorkspacePage({ projectId }: { projectId: string }) {
     if (!model || model.rule.id !== 'life-like/v1') return;
     const comments = [
       `#N ${name.trim() || 'Untitled model'}`,
-      `#C Generation 0 exported from Cellular Automata Studio.`,
+      `#C Generation 0 exported from Cellular Automata Lab.`,
       `#C RLE keeps only cells and rule; boundary (${model.boundary.kind}) and lattice size are not part of RLE. Use .ca.json to keep them.`,
     ];
     downloadText(`${safeFilename(name)}.rle`, writeRle(model.width, model.height, model.initial, model.rule, comments), 'text/plain');
@@ -418,7 +418,7 @@ export function WorkspacePage({ projectId }: { projectId: string }) {
     if (stochastic && inspect && !running && status.runState !== 'loading') sim.inspect(inspect.x, inspect.y);
   }, [stochastic, inspect, status.generation, running, status.runState]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Pause when the tab is hidden (§3.4 runtime behavior).
+  // Pause when the tab is hidden.
   useEffect(() => {
     const on = () => {
       if (document.hidden && running) {
@@ -430,7 +430,7 @@ export function WorkspacePage({ projectId }: { projectId: string }) {
     return () => document.removeEventListener('visibilitychange', on);
   }, [running, sim]);
 
-  // ---- Keyboard shortcuts (§9.5) ----
+  // ---- Keyboard shortcuts ----
   useEffect(() => {
     const on = (e: KeyboardEvent) => {
       if (isTyping(e.target) || e.altKey) return;

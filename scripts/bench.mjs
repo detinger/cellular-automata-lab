@@ -1,5 +1,5 @@
 // `npm run bench`: bundles scripts/benchEntry.ts with Vite and prints engine throughput per rule and
-// lattice size (PLAN.md §9.4). Results depend on the machine; record device details with them.
+// lattice size. Results depend on the machine; record device details with them.
 import { build } from 'vite';
 import { mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir, cpus, totalmem, platform, release } from 'node:os';

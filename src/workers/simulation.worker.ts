@@ -1,5 +1,5 @@
 /// <reference lib="webworker" />
-// Simulation worker: owns the engine's current/next arrays; sends copies to the UI (PLAN.md §4.6, §7.6).
+// Simulation worker: owns the engine's current/next arrays; sends copies to the UI.
 import { createEngine, CapabilityError, type Engine, type EngineCheckpoint } from '../domain/engine/engine';
 import {
   CHECKPOINT_BUDGET_BYTES,
@@ -27,7 +27,7 @@ let runStart = 0;
 let runStartGeneration = 0;
 let rateWindow: Array<[number, number]> = [];
 
-// Display snapshot pool: at most two unconsumed frames (§4.6).
+// Display snapshot pool: at most two unconsumed frames.
 const MAX_PENDING = 2;
 let pool: Map<number, ArrayBuffer> = new Map();
 let pending = 0;
@@ -78,7 +78,7 @@ function record() {
 
 function flushMetrics(requestId: number, force: boolean) {
   const now = performance.now();
-  if (!force && now - lastMetricsPost < 250) return; // at most 4 batches per second (§4.6)
+  if (!force && now - lastMetricsPost < 250) return; // at most 4 batches per second
   if (!pendingRows.length && !seriesReset && truncatedAt === null) return;
   post({ ...env(requestId), type: 'METRICS', reset: seriesReset, rows: pendingRows, truncatedAt });
   pendingRows = [];
@@ -87,7 +87,7 @@ function flushMetrics(requestId: number, force: boolean) {
   if (historyDirty) postHistory(requestId);
 }
 
-// Checkpoint ring (§3.4): every CHECKPOINT_INTERVAL generations, oldest evicted beyond the byte budget.
+// Checkpoint ring: every CHECKPOINT_INTERVAL generations, oldest evicted beyond the byte budget.
 let checkpoints: EngineCheckpoint[] = [];
 let checkpointBytes = 0;
 const cpSize = (cp: EngineCheckpoint) => cp.cells.byteLength + 256;
@@ -224,7 +224,7 @@ function tick(requestId: number) {
     return;
   }
   if (recorded >= METRICS_CAP) {
-    // Retention cap reached: pause rather than silently discard measurements (§9.4).
+    // Retention cap reached: pause rather than silently discard measurements.
     stopTimer();
     state = 'paused';
     flushMetrics(requestId, true);
@@ -245,7 +245,7 @@ function tick(requestId: number) {
   timer = setTimeout(() => tick(requestId), delay);
 }
 
-// Seek/replay (§3.4, §7.6): chunked so PAUSE/CANCEL can interrupt; no frame per replayed generation.
+// Seek/replay: chunked so PAUSE/CANCEL can interrupt; no frame per replayed generation.
 let replay: { target: number; record: boolean; requestId: number } | null = null;
 
 function finishReplay(requestId: number, cancelled: boolean) {
