@@ -1,0 +1,101 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ca-studio.local/schemas/experiment-package.v1.json",
+  "title": "Cellular Automata Studio experiment package (.ca-experiment.json), schema version 1",
+  "description": "Export format only: definition, run manifest, run-level results and summaries. Sampled rows are in the metrics CSV unless samples were requested.",
+  "type": "object",
+  "required": ["format", "schemaVersion", "exportedAt", "status", "engineVersion", "prngAdapter", "definition", "manifest", "runs", "summaries", "conclusion"],
+  "properties": {
+    "format": { "const": "ca-studio-experiment-package" },
+    "schemaVersion": { "const": 1 },
+    "exportedAt": { "type": "string", "format": "date-time" },
+    "status": { "enum": ["draft", "running", "completed", "cancelled", "interrupted"] },
+    "engineVersion": { "type": "string" },
+    "prngAdapter": { "type": "object", "required": ["id", "algorithm", "library"] },
+    "runtime": { "type": ["string", "null"] },
+    "definition": {
+      "type": "object",
+      "required": [
+        "format",
+        "schemaVersion",
+        "id",
+        "question",
+        "hypothesis",
+        "baseRevisionId",
+        "baseModelHash",
+        "baseModel",
+        "factors",
+        "initialization",
+        "replicates",
+        "masterSeed",
+        "seedDerivation",
+        "design",
+        "horizon",
+        "sampleInterval",
+        "stop",
+        "window",
+        "response"
+      ],
+      "properties": {
+        "format": { "const": "ca-studio-experiment" },
+        "schemaVersion": { "const": 1 },
+        "baseModel": { "$ref": "https://ca-studio.local/schemas/model.v1.json" },
+        "replicates": { "type": "integer", "minimum": 1 },
+        "horizon": { "type": "integer", "minimum": 1 },
+        "sampleInterval": { "type": "integer", "minimum": 1 },
+        "seedDerivation": { "const": "ca-studio-seed-v1" },
+        "design": { "enum": ["independent", "paired"] },
+        "stop": { "type": "object", "required": ["kind"], "properties": { "kind": { "enum": ["horizon", "absorbing", "first-no-fire", "recurrence"] } } },
+        "response": {
+          "type": "object",
+          "required": ["metric", "aggregate"],
+          "properties": { "aggregate": { "enum": ["final", "window-mean", "window-max", "event-time"] } }
+        }
+      }
+    },
+    "manifest": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["runId", "configurationKey", "factorValues", "replicateIndex", "seeds"],
+        "properties": {
+          "seeds": {
+            "type": "object",
+            "required": ["initialization", "transition"],
+            "properties": { "initialization": { "type": "string" }, "transition": { "type": "string" } }
+          }
+        }
+      }
+    },
+    "runs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "runId",
+          "status",
+          "requestedHorizon",
+          "actualEnd",
+          "stopReason",
+          "response",
+          "seeds",
+          "engineVersion",
+          "initialBase64",
+          "width",
+          "height"
+        ],
+        "properties": {
+          "status": { "enum": ["completed", "cancelled", "error"] },
+          "stopReason": { "enum": ["horizon", "absorbing", "first-no-fire", "recurrence", "cancelled", "error"] },
+          "response": {
+            "type": "object",
+            "required": ["value", "reason"],
+            "properties": { "value": { "type": ["number", "null"] }, "reason": { "type": ["string", "null"] } }
+          }
+        }
+      }
+    },
+    "summaries": { "type": "array" },
+    "conclusion": { "type": "string" }
+  }
+}

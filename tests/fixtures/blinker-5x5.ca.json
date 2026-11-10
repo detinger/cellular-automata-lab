@@ -1,0 +1,19 @@
+{
+  "format": "ca-studio-model",
+  "schemaVersion": 1,
+  "projectId": "fixture-project",
+  "revisionId": "fixture-blinker-v1",
+  "name": "Blinker — 5 by 5",
+  "width": 5,
+  "height": 5,
+  "stateCount": 2,
+  "stateLabels": ["Dead", "Alive"],
+  "boundary": { "kind": "fixed-exterior", "state": 0 },
+  "schedule": "synchronous",
+  "rule": { "id": "life-like/v1", "birth": [3], "survive": [2, 3] },
+  "initial": {
+    "encoding": "base64-u8",
+    "byteLength": 25,
+    "data": "AAAAAAAAAAAAAAABAQEAAAAAAAAAAAAAAA=="
+  }
+}

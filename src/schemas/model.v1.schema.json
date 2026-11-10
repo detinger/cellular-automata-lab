@@ -1,0 +1,428 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ca-studio.local/schemas/model.v1.json",
+  "title": "Cellular Automata Studio model, schema version 1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "schemaVersion",
+    "projectId",
+    "revisionId",
+    "name",
+    "width",
+    "height",
+    "stateCount",
+    "stateLabels",
+    "boundary",
+    "schedule",
+    "rule",
+    "initial"
+  ],
+  "properties": {
+    "format": {
+      "const": "ca-studio-model"
+    },
+    "schemaVersion": {
+      "const": 1
+    },
+    "projectId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "revisionId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "name": {
+      "type": "string",
+      "maxLength": 200
+    },
+    "width": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4096
+    },
+    "height": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1024
+    },
+    "stateCount": {
+      "type": "integer",
+      "minimum": 2,
+      "maximum": 16
+    },
+    "stateLabels": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 16,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 60
+      }
+    },
+    "boundary": {
+      "type": "object",
+      "required": ["kind"],
+      "properties": {
+        "kind": {
+          "enum": ["periodic", "fixed-exterior"]
+        }
+      },
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "fixed-exterior"
+          }
+        }
+      },
+      "then": {
+        "additionalProperties": false,
+        "required": ["kind", "state"],
+        "properties": {
+          "kind": {
+            "const": "fixed-exterior"
+          },
+          "state": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 15
+          }
+        }
+      },
+      "else": {
+        "additionalProperties": false,
+        "properties": {
+          "kind": {
+            "const": "periodic"
+          }
+        }
+      }
+    },
+    "schedule": {
+      "const": "synchronous"
+    },
+    "rule": {
+      "type": "object",
+      "required": ["id"],
+      "properties": {
+        "id": {
+          "enum": ["life-like/v1", "elementary/v1", "brians-brain/v1", "cyclic/v1", "forest-fire/v1", "spatial-sir/v1", "count-table/v1"]
+        }
+      },
+      "if": {
+        "properties": {
+          "id": {
+            "const": "life-like/v1"
+          }
+        }
+      },
+      "then": {
+        "additionalProperties": false,
+        "required": ["id", "birth", "survive"],
+        "properties": {
+          "id": {
+            "const": "life-like/v1"
+          },
+          "birth": {
+            "$ref": "#/definitions/countSet"
+          },
+          "survive": {
+            "$ref": "#/definitions/countSet"
+          }
+        }
+      },
+      "else": {
+        "if": {
+          "properties": {
+            "id": {
+              "const": "elementary/v1"
+            }
+          }
+        },
+        "then": {
+          "additionalProperties": false,
+          "required": ["id", "ruleNumber"],
+          "properties": {
+            "id": {
+              "const": "elementary/v1"
+            },
+            "ruleNumber": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 255
+            }
+          }
+        },
+        "else": {
+          "if": {
+            "properties": {
+              "id": {
+                "const": "brians-brain/v1"
+              }
+            }
+          },
+          "then": {
+            "additionalProperties": false,
+            "required": ["id"],
+            "properties": {
+              "id": {
+                "const": "brians-brain/v1"
+              }
+            }
+          },
+          "else": {
+            "if": {
+              "properties": {
+                "id": {
+                  "const": "cyclic/v1"
+                }
+              }
+            },
+            "then": {
+              "additionalProperties": false,
+              "required": ["id", "states", "threshold", "neighborhood"],
+              "properties": {
+                "id": {
+                  "const": "cyclic/v1"
+                },
+                "states": {
+                  "type": "integer",
+                  "minimum": 3,
+                  "maximum": 16
+                },
+                "threshold": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 8
+                },
+                "neighborhood": {
+                  "enum": ["moore-r1", "von-neumann-r1"]
+                }
+              }
+            },
+            "else": {
+              "if": {
+                "properties": {
+                  "id": {
+                    "const": "forest-fire/v1"
+                  }
+                }
+              },
+              "then": {
+                "additionalProperties": false,
+                "required": ["id", "growth", "ignition", "neighborhood"],
+                "properties": {
+                  "id": {
+                    "const": "forest-fire/v1"
+                  },
+                  "growth": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "ignition": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "neighborhood": {
+                    "enum": ["moore-r1", "von-neumann-r1"]
+                  }
+                }
+              },
+              "else": {
+                "if": {
+                  "properties": {
+                    "id": {
+                      "const": "spatial-sir/v1"
+                    }
+                  }
+                },
+                "then": {
+                  "additionalProperties": false,
+                  "required": ["id", "beta", "gamma", "neighborhood"],
+                  "properties": {
+                    "id": {
+                      "const": "spatial-sir/v1"
+                    },
+                    "beta": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1
+                    },
+                    "gamma": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1
+                    },
+                    "neighborhood": {
+                      "enum": ["moore-r1", "von-neumann-r1"]
+                    }
+                  }
+                },
+                "else": {
+                  "if": {
+                    "properties": {
+                      "id": {
+                        "const": "count-table/v1"
+                      }
+                    }
+                  },
+                  "then": {
+                    "additionalProperties": false,
+                    "required": ["id", "states", "neighborhood", "clauses", "fallback"],
+                    "properties": {
+                      "id": {
+                        "const": "count-table/v1"
+                      },
+                      "states": {
+                        "type": "integer",
+                        "minimum": 2,
+                        "maximum": 8
+                      },
+                      "neighborhood": {
+                        "enum": ["moore-r1", "von-neumann-r1"]
+                      },
+                      "clauses": {
+                        "type": "array",
+                        "maxItems": 256,
+                        "items": {
+                          "$ref": "#/definitions/countClause"
+                        }
+                      },
+                      "fallback": {
+                        "$ref": "#/definitions/fallback"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "initial": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["encoding", "byteLength", "data"],
+      "properties": {
+        "encoding": {
+          "const": "base64-u8"
+        },
+        "byteLength": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4194304
+        },
+        "data": {
+          "type": "string",
+          "maxLength": 5592408
+        }
+      }
+    }
+  },
+  "definitions": {
+    "countSet": {
+      "type": "array",
+      "uniqueItems": true,
+      "maxItems": 9,
+      "items": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 8
+      }
+    },
+    "countClause": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["currentStates", "counts", "nextState"],
+      "properties": {
+        "currentStates": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 7
+          }
+        },
+        "counts": {
+          "type": "array",
+          "maxItems": 8,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["state", "min", "max"],
+            "properties": {
+              "state": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 7
+              },
+              "min": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 8
+              },
+              "max": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 8
+              }
+            }
+          }
+        },
+        "nextState": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 7
+        }
+      }
+    },
+    "fallback": {
+      "type": "object",
+      "required": ["kind"],
+      "properties": {
+        "kind": {
+          "enum": ["keep-current", "state"]
+        }
+      },
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "state"
+          }
+        }
+      },
+      "then": {
+        "additionalProperties": false,
+        "required": ["kind", "state"],
+        "properties": {
+          "kind": {
+            "const": "state"
+          },
+          "state": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 7
+          }
+        }
+      },
+      "else": {
+        "additionalProperties": false,
+        "properties": {
+          "kind": {
+            "const": "keep-current"
+          }
+        }
+      }
+    }
+  }
+}
