@@ -4,7 +4,10 @@ import { expect, test, type Download, type Page } from '@playwright/test';
 
 const openPreset = async (page: Page, name: string) => {
   await page.goto('/');
-  await page.locator('article', { hasText: name }).getByRole('button', { name: 'Open as new project' }).click();
+  await page
+    .locator('article', { has: page.getByRole('heading', { name: name, exact: true }) })
+    .getByRole('button', { name: 'Open as new project' })
+    .click();
   await expect(page.getByRole('button', { name: 'Play' })).toBeEnabled();
 };
 /** RFC 4180 line splitter: commas inside quoted fields do not split. */

@@ -6,7 +6,7 @@ Cellular Automata Lab runs entirely in the student's browser: no accounts, no se
 
 | Session | Lessons | Challenges | In class |
 |---|---|---|---|
-| 1. Foundations | L01 Cells, states and generations; L02 Local rules | CA-01 Predict one Life generation | Students predict on paper, then check with the Inspect tool. |
+| 1. Foundations | L01 Cells, states and generations; L02 Local rules; Conway's Game of Life | CA-01 Predict one Life generation | Students predict on paper, then check with the Inspect tool. |
 | 2. Neighborhoods and boundaries | L03 Neighborhoods; L04 Boundaries | CA-04 Diagnose a boundary difference | Same glider, two boundaries: use **Compare** side by side. |
 | 3. Deterministic dynamics | L05 Patterns; L06 Elementary rules; L11 Excitable and cyclic media | CA-02 Still life, CA-03 Oscillator, CA-05 Encode a rule | Groups find different still lifes; the checker accepts any valid one. |
 | 4. Modeling choices | L07 Rule 184 traffic; L09 Count rules | CA-07 Traffic density, CA-09 Repair a rule table | Discuss conservation and why overlapping clauses are rejected. |

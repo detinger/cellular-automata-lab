@@ -5,7 +5,10 @@ const alive = (page: import('@playwright/test').Page) => page.locator('.kpi').fi
 
 test('blinker vertical slice', async ({ page }) => {
   await page.goto('/');
-  await page.locator('article', { hasText: 'Blinker' }).getByRole('button', { name: 'Open as new project' }).click();
+  await page
+    .locator('article', { has: page.getByRole('heading', { name: 'Blinker', exact: true }) })
+    .getByRole('button', { name: 'Open as new project' })
+    .click();
   await expect(page.getByRole('button', { name: 'Play' })).toBeEnabled();
   await expect(alive(page)).toHaveText('3');
   await expect(page.getByLabel('Birth/survival notation')).toHaveValue('B3/S23');
@@ -59,7 +62,10 @@ test('invalid import leaves projects unchanged and explains why', async ({ page 
 
 test('playback reports achieved rate and pauses at an exact generation', async ({ page }) => {
   await page.goto('/');
-  await page.locator('article', { hasText: 'Glider' }).getByRole('button', { name: 'Open as new project' }).click();
+  await page
+    .locator('article', { has: page.getByRole('heading', { name: 'Glider', exact: true }) })
+    .getByRole('button', { name: 'Open as new project' })
+    .click();
   await page.getByRole('button', { name: 'Play' }).click();
   await expect(page.locator('.ws-panel.right')).toContainText('achieved');
   await page.getByRole('button', { name: 'Pause' }).click();

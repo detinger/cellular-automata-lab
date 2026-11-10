@@ -1,5 +1,5 @@
-import { Suspense, lazy, useEffect } from 'react';
-import { BookOpen, FlaskConical, GraduationCap, LayoutGrid, Moon, Sun } from 'lucide-react';
+import { Suspense, lazy, useEffect, useState } from 'react';
+import { BookOpen, FlaskConical, GraduationCap, LayoutGrid, Moon, PanelLeftClose, PanelLeftOpen, Sun } from 'lucide-react';
 const LearnPage = lazy(() => import('../features/learning/LearnPage').then((m) => ({ default: m.LearnPage })));
 const ComparePage = lazy(() => import('../features/compare/ComparePage').then((m) => ({ default: m.ComparePage })));
 const LessonPage = lazy(() => import('../features/learning/LessonPage').then((m) => ({ default: m.LessonPage })));
@@ -16,6 +16,8 @@ const WorkspacePage = lazy(() => import('../features/modeler/WorkspacePage').the
 import { useRoute } from './router';
 import { ThemeProvider, useTheme } from './theme';
 
+const NAV_KEY = 'ca-lab-nav-collapsed';
+
 function Shell() {
   const route = useRoute();
   // Workers do not survive a reload: any experiment still marked running was interrupted.
@@ -23,6 +25,23 @@ function Shell() {
     void markInterrupted().catch(() => {});
   }, []);
   const update = useUpdateAvailable();
+  // Collapsed menu is a per-browser convenience; it works without storage too.
+  const [collapsed, setCollapsed] = useState(() => {
+    try {
+      return localStorage.getItem(NAV_KEY) === '1';
+    } catch {
+      return false;
+    }
+  });
+  const toggleNav = () =>
+    setCollapsed((c) => {
+      try {
+        localStorage.setItem(NAV_KEY, c ? '0' : '1');
+      } catch {
+        /* storage unavailable: the choice lasts for this page only */
+      }
+      return !c;
+    });
   const { resolved, toggle } = useTheme();
   return (
     <div className="shell">
@@ -36,7 +55,7 @@ function Shell() {
       >
         Skip to content
       </a>
-      <nav className="nav" aria-label="Main">
+      <nav className="nav" aria-label="Main" data-collapsed={collapsed}>
         <div className="nav-brand">
           <span className="brand-mark">
             <BrandMark />
@@ -50,6 +69,7 @@ function Shell() {
           <span className="nav-group-label">Workspace</span>
           <a
             className="nav-link"
+            title={collapsed ? 'Models' : undefined}
             href="#/"
             aria-current={route.name === 'library' || route.name === 'project' || route.name === 'compare' ? 'page' : undefined}
           >
@@ -58,23 +78,49 @@ function Shell() {
           </a>
           <a
             className="nav-link"
+            title={collapsed ? 'Learn' : undefined}
             href="#/learn"
             aria-current={route.name === 'learn' || route.name === 'lesson' || route.name === 'challenge' ? 'page' : undefined}
           >
             <GraduationCap size={18} aria-hidden />
             <span className="nav-label">Learn</span>
           </a>
-          <a className="nav-link" href="#/experiments" aria-current={route.name === 'experiments' || route.name === 'experiment' ? 'page' : undefined}>
+          <a
+            className="nav-link"
+            title={collapsed ? 'Experiments' : undefined}
+            href="#/experiments"
+            aria-current={route.name === 'experiments' || route.name === 'experiment' ? 'page' : undefined}
+          >
             <FlaskConical size={18} aria-hidden />
             <span className="nav-label">Experiments</span>
           </a>
-          <a className="nav-link" href="#/capabilities" aria-current={route.name === 'capabilities' ? 'page' : undefined}>
+          <a
+            className="nav-link"
+            title={collapsed ? 'Capabilities' : undefined}
+            href="#/capabilities"
+            aria-current={route.name === 'capabilities' ? 'page' : undefined}
+          >
             <BookOpen size={18} aria-hidden />
             <span className="nav-label">Capabilities</span>
           </a>
         </div>
         <div className="nav-foot">
-          <button className="nav-link" onClick={toggle} aria-label={`Switch to ${resolved === 'dark' ? 'light' : 'dark'} theme`}>
+          <button
+            className="nav-link nav-collapse"
+            onClick={toggleNav}
+            aria-expanded={!collapsed}
+            aria-label={collapsed ? 'Expand menu' : 'Collapse menu'}
+            title={collapsed ? 'Expand menu' : 'Collapse menu'}
+          >
+            {collapsed ? <PanelLeftOpen size={18} aria-hidden /> : <PanelLeftClose size={18} aria-hidden />}
+            <span className="nav-label">Collapse menu</span>
+          </button>
+          <button
+            className="nav-link"
+            onClick={toggle}
+            aria-label={`Switch to ${resolved === 'dark' ? 'light' : 'dark'} theme`}
+            title={collapsed ? `Switch to ${resolved === 'dark' ? 'light' : 'dark'} theme` : undefined}
+          >
             {resolved === 'dark' ? <Sun size={18} aria-hidden /> : <Moon size={18} aria-hidden />}
             <span className="nav-label">{resolved === 'dark' ? 'Light theme' : 'Dark theme'}</span>
           </button>

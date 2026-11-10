@@ -4,13 +4,13 @@ A local-first web app for teaching **modelling and simulation with cellular auto
 
 ## Features
 
-- **Seven rule families:** Life-like rules (`B…/S…`), all 256 elementary rules, Brian's Brain, cyclic CA, forest fire, spatial SIR, and custom count-table rules. They run on finite lattices with a periodic or fixed-exterior boundary.
+- **Seven rule families:** Life-like rules (`B…/S…`, including Conway's Game of Life, B3/S23), all 256 elementary rules, Brian's Brain, cyclic CA, forest fire, spatial SIR, and custom count-table rules. They run on finite lattices with a periodic or fixed-exterior boundary.
 - **Editing:** paint with any state, stamp and rotate patterns, select, copy and move regions, fill randomly with a visible seed, undo and redo.
 - **Run and explain:** Play, Step, Step N and Reset; jump to any generation by exact replay. The inspector shows a cell's neighborhood, the rule clause that applies, the probabilities, and the random draws actually used.
 - **Measure:** state fractions, activity, entropy, births and deaths, new infections and traffic flow, shown as charts and tables and exported to CSV.
 - **Experiments:** replications and one- or two-factor parameter sweeps with derived seeds, progress, cancellation and resume. Results include 95% intervals and handle runs that never reached their event (censoring). Exports: CSV, an experiment package (`.ca-experiment.json`), and a Markdown report.
 - **Compare** a baseline with an alternative: every changed assumption is listed, the two run side by side, and you can run independent or paired replicated comparisons.
-- **Learn:** 12 lessons (predict, try, check, reflect) and 10 automatically checked challenges with hints and rubrics. Progress is stored locally.
+- **Learn:** 13 lessons (predict, try, check, reflect), including an introduction to Conway's Game of Life, and 10 automatically checked challenges with hints and rubrics. Progress is stored locally.
 - **Files:** `.ca.json` models (versioned JSON Schema), binary RLE patterns, and PNG snapshots with a caption.
 - **Usability:** light and dark themes, full keyboard operation, layouts down to 390 px wide, and offline use after one visit.
 

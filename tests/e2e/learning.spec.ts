@@ -57,5 +57,5 @@ test('E2E-02: lesson and challenge completed with the keyboard only', async ({ p
   await expect(page.locator('td .pass')).toHaveCount(3); // last assessment is shown again
 
   await page.goto('/#/learn');
-  await expect(page.getByText('1 of 12 lessons and 1 of 10 challenges completed')).toBeVisible();
+  await expect(page.getByText('1 of 13 lessons and 1 of 10 challenges completed')).toBeVisible();
 });

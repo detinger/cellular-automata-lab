@@ -3,7 +3,10 @@ import { expect, test, type Page } from '@playwright/test';
 
 const openPreset = async (page: Page, name: string) => {
   await page.goto('/');
-  await page.locator('article', { hasText: name }).getByRole('button', { name: 'Open as new project' }).click();
+  await page
+    .locator('article', { has: page.getByRole('heading', { name: name, exact: true }) })
+    .getByRole('button', { name: 'Open as new project' })
+    .click();
   await expect(page.getByRole('button', { name: 'Play' })).toBeEnabled();
 };
 const gen = (page: Page) => page.locator('.canvas-status');

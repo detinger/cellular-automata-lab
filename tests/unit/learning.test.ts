@@ -20,8 +20,8 @@ const engine = (id: string) => {
 const ctx = (model: Model, over: Partial<ChallengeContext> = {}): ChallengeContext => ({ model, seed: '1', experiments: [], answers: {}, ...over });
 
 describe('lesson inventory', () => {
-  it('has twelve lessons over six levels, each with all eight parts', () => {
-    expect(LESSONS).toHaveLength(12);
+  it('has thirteen lessons over six levels, each with all eight parts', () => {
+    expect(LESSONS).toHaveLength(13);
     expect(new Set(LESSONS.map((l) => l.level))).toEqual(new Set([1, 2, 3, 4, 5, 6]));
     expect(LESSONS.filter((l) => l.level <= 3).length).toBeGreaterThanOrEqual(6); // P0: six lessons on levels 1–3
     for (const l of LESSONS) {
@@ -146,6 +146,23 @@ describe('lesson claims', () => {
     const { m, e } = engine('L10-forest-fire');
     e.step(5);
     for (let y = 0; y < m.height; y++) expect(e.cells[y * m.width + 5]).toBe(2);
+  });
+  it('L13: three gliders (15 cells) after 90 generations; overpopulation kills a live cell with 4 neighbors', () => {
+    const { e } = engine('L13-game-of-life');
+    expect(e.metrics.counts[1]).toBe(36);
+    e.step(90);
+    expect(e.metrics.counts[1]).toBe(51);
+    const plus = createEngine(
+      lifeModel('x', 5, 5, [
+        [2, 2],
+        [1, 2],
+        [3, 2],
+        [2, 1],
+        [2, 3],
+      ]),
+    );
+    plus.step();
+    expect(plus.cells[2 * 5 + 2]).toBe(0);
   });
   it('L11: the Brian’s Brain structure moves up', () => {
     const { m, e } = engine('L11-excitable-cyclic');

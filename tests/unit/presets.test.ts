@@ -217,3 +217,36 @@ describe('Phase 3 presets (behavior verified, stochastic ones for their stated s
     expect(frozenAt).toBeGreaterThan(0);
   });
 });
+
+describe("Conway's Game of Life examples", () => {
+  it('the soup falls from about 35% to about 3% and repeats every 2 generations from generation 1,335', () => {
+    const m = presetById('game-of-life')!.build();
+    const N = m.width * m.height;
+    expect(Math.abs(m.initial.reduce((a, b) => a + b, 0) / N - 0.35)).toBeLessThan(0.01);
+    const e = createEngine(m);
+    e.step(1335);
+    const s1335 = new Uint8Array(e.cells);
+    e.step();
+    expect(e.cells).not.toEqual(s1335);
+    e.step();
+    expect(e.cells).toEqual(s1335);
+    expect(Math.abs(e.metrics.counts[1] / N - 0.03)).toBeLessThan(0.005);
+  });
+  it('the glider gun adds 5 cells every 30 generations until 270 and stays intact', () => {
+    const m = presetById('gosper-gun')!.build();
+    const box = (c: Uint8Array) => {
+      const out: number[] = [];
+      for (let y = 2; y < 11; y++) for (let x = 2; x < 38; x++) out.push(c[y * m.width + x]);
+      return out.join('');
+    };
+    const e = createEngine(m);
+    for (let k = 1; k <= 9; k++) {
+      e.step(30);
+      expect(e.metrics.counts[1]).toBe(36 + 5 * k);
+    }
+    for (let k = 10; k <= 40; k++) {
+      e.step(30);
+      expect(box(e.cells)).toBe(box(m.initial));
+    }
+  });
+});

@@ -31,7 +31,10 @@ test('all controls on the main pages have accessible names', async ({ page }) =>
   await check('library');
   for (const preset of ['Blinker', 'Rule 30', 'Isolated SIR infection', 'Majority vote (count table)', 'Cyclic CA from noise']) {
     await page.goto('/');
-    await page.locator('article', { hasText: preset }).getByRole('button', { name: 'Open as new project' }).click();
+    await page
+      .locator('article', { has: page.getByRole('heading', { name: preset, exact: true }) })
+      .getByRole('button', { name: 'Open as new project' })
+      .click();
     await expect(page.getByRole('button', { name: 'Play' })).toBeEnabled();
     await check(`workspace: ${preset}`);
     if (preset === 'Isolated SIR infection') {
@@ -63,11 +66,29 @@ test('no horizontal page scroll at 390 px wide', async ({ page }) => {
     );
   await page.goto('/');
   await noScroll('library');
-  await page.locator('article', { hasText: 'Isolated SIR infection' }).getByRole('button', { name: 'Open as new project' }).click();
+  await page
+    .locator('article', { has: page.getByRole('heading', { name: 'Isolated SIR infection', exact: true }) })
+    .getByRole('button', { name: 'Open as new project' })
+    .click();
   await expect(page.getByRole('button', { name: 'Play' })).toBeEnabled();
   await noScroll('workspace');
   for (const path of ['/#/learn', '/#/lesson/L03-neighborhoods', '/#/challenge/CA-07', '/#/experiments', '/#/capabilities']) {
     await page.goto(path);
     await noScroll(path);
   }
+});
+
+test('the left menu collapses to an icon rail, remembers it, and expands again', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await page.goto('/');
+  const nav = page.getByRole('navigation', { name: 'Main' });
+  expect((await nav.boundingBox())!.width).toBeGreaterThan(200);
+  await page.getByRole('button', { name: 'Collapse menu' }).click();
+  await expect.poll(async () => (await nav.boundingBox())!.width).toBeLessThan(70);
+  await expect(nav.getByText('Experiments')).toBeHidden();
+  await expect(nav.getByRole('link', { name: 'Experiments' })).toHaveAttribute('title', 'Experiments');
+  await page.reload();
+  await expect(page.getByRole('button', { name: 'Expand menu' })).toHaveAttribute('aria-expanded', 'false');
+  await page.getByRole('button', { name: 'Expand menu' }).click();
+  await expect.poll(async () => (await nav.boundingBox())!.width).toBeGreaterThan(200);
 });

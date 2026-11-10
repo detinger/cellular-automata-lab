@@ -1403,3 +1403,48 @@ table.data th.num {
   border-bottom: 1px solid var(--border);
   font-size: 13px;
 }
+
+/* ---------- Collapsible menu (wide screens; narrow screens use the top bar) ---------- */
+.nav-foot {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+@media (min-width: 821px) {
+  .nav {
+    transition: width 160ms ease;
+  }
+  .nav[data-collapsed='true'] {
+    width: 60px;
+  }
+  .nav[data-collapsed='true'] .nav-brand {
+    padding: 0 15px;
+  }
+  .nav[data-collapsed='true'] .wordmark,
+  .nav[data-collapsed='true'] .nav-group-label,
+  .nav[data-collapsed='true'] .nav-label {
+    display: none;
+  }
+  .nav[data-collapsed='true'] .nav-group,
+  .nav[data-collapsed='true'] .nav-foot {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  .nav[data-collapsed='true'] .nav-link {
+    justify-content: center;
+    padding: 8px 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav {
+    transition: none;
+  }
+}
+@media (max-width: 820px) {
+  .nav-collapse {
+    display: none;
+  }
+  .nav-foot {
+    flex-direction: row;
+  }
+}

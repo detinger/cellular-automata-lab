@@ -2,6 +2,7 @@
 import type { Boundary, Model, RuleSpec } from '../../domain/contracts/model';
 import { randomInitialize } from '../../domain/random/seeded';
 import { defaultLabels, stateCountOf } from '../../domain/model/families';
+import { PATTERNS, stamp } from '../patterns';
 
 export interface Preset {
   id: string;
@@ -215,6 +216,39 @@ export const PRESETS: readonly Preset[] = [
     description: 'A 200-cell periodic ring where 40% of cells hold a car (a fixed, documented pattern).',
     expectedBehavior: 'A car moves right only if the cell ahead was empty; the number of cars never changes.',
     build: () => ecaModel('Rule 184 traffic', 184, trafficPattern(200), { kind: 'periodic' }, ['Empty road', 'Car']),
+  },
+  {
+    ...L,
+    id: 'game-of-life',
+    name: "Conway's Game of Life",
+    description: 'A random soup: 35% of cells alive (seed “life”) on a 128 × 128 torus under Life (B3/S23).',
+    expectedBehavior:
+      'The soup thins out quickly. From generation 1,335 the whole lattice repeats every 2 generations: only still lifes and two-step oscillators remain, with about 3% of cells alive.',
+    build: () => {
+      const m = lifeModel("Conway's Game of Life", 128, 128, [], { kind: 'periodic' });
+      m.initial = randomInitialize(m.initial, 128, 128, [0.65, 0.35], 'life');
+      return m;
+    },
+  },
+  {
+    ...L,
+    id: 'gosper-gun',
+    name: 'Gosper glider gun',
+    description: 'The Gosper glider gun at the top left of a 120 × 80 lattice with a dead exterior.',
+    expectedBehavior:
+      'The gun repeats every 30 generations and fires one glider each time: the population grows by exactly 5 cells per 30 generations until generation 270. Then gliders reach the far corner, where the dead edge turns them into debris that absorbs later gliders. The gun itself keeps working.',
+    build: () => {
+      const m = lifeModel('Gosper glider gun', 120, 80, []);
+      m.initial = stamp(
+        m.initial,
+        120,
+        80,
+        PATTERNS.find((p) => p.id === 'gosper-gun')!,
+        2,
+        2,
+      );
+      return m;
+    },
   },
   {
     family: 'life-like',

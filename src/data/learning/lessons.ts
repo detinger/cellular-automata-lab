@@ -1,4 +1,4 @@
-// Twelve lessons over six levels. Every factual claim about a demo is checked in
+// Thirteen lessons over six levels. Every factual claim about a demo is checked in
 // tests/unit/learning.test.ts against the engine; formal results from outside sources are named as such.
 import type { Lesson } from '../../domain/learning/types';
 import { ecaModel, familyModel, lifeModel, presetById, trafficPattern } from '../presets';
@@ -96,6 +96,57 @@ export const LESSONS: readonly Lesson[] = [
       },
     ],
     reflection: 'Explain one birth and one death in the blinker using neighbor counts.',
+  },
+  {
+    id: 'L13-game-of-life',
+    version: 1,
+    level: 1,
+    title: "Conway's Game of Life",
+    objective:
+      'State the four rules of the Game of Life in plain words, and recognize its main kinds of patterns: still lifes, oscillators, spaceships and guns.',
+    explanation: [
+      'The Game of Life is a cellular automaton devised by the mathematician John Horton Conway around 1970. It became famous after Martin Gardner described it in his “Mathematical Games” column in Scientific American (October 1970). It is a “zero-player game”: you choose the starting cells, and the rules do the rest.',
+      'Every cell is alive or dead and looks at its 8 neighbors. A live cell with fewer than 2 live neighbors dies (underpopulation). A live cell with 2 or 3 live neighbors survives. A live cell with more than 3 dies (overpopulation). A dead cell with exactly 3 live neighbors becomes alive (reproduction). In this app that rule is written B3/S23: born with 3, survives with 2 or 3.',
+      'Those four rules produce a whole zoo of patterns. Still lifes never change (block). Oscillators repeat (blinker, period 2). Spaceships travel (glider). Some small seeds, called methuselahs, take a long time to settle: on an unbounded plane the five-cell R-pentomino needs 1,103 generations, a known result this app does not check on its finite lattices.',
+      'Conway suspected that no pattern could grow forever. In 1970 a group led by Bill Gosper at MIT disproved this with the glider gun, which fires a new glider every 30 generations. Life was later shown to be able to compute anything a computer can (Berlekamp, Conway and Guy, Winning Ways, 1982); that is an established mathematical result, not something the app tests.',
+      'Here the gun sits on a finite lattice with a dead exterior. Its gliders eventually reach the far corner, where the edge turns them into debris that absorbs later gliders. The gun itself keeps working.',
+    ],
+    demo: {
+      build: () => presetById('gosper-gun')!.build(),
+      caption: 'Life (B3/S23), 120 × 80 lattice, fixed dead exterior, Gosper glider gun with its top-left corner at (2, 2): 36 live cells.',
+    },
+    prediction: {
+      id: 'p',
+      question: 'The gun repeats itself every 30 generations and fires one glider each time. How many live cells will there be at generation 90?',
+      options: ['36 — it stays the same', '51 — three new gliders of 5 cells each', '108 — it triples'],
+      answer: 1,
+      explanation: 'After 90 generations the gun has fired 3 gliders. Each glider has 5 cells, so 36 + 15 = 51.',
+    },
+    mistake: {
+      title: 'Forgetting that the lattice is finite',
+      text: 'Conway’s Life is defined on an endless plane. Any lattice in a computer has edges, so a pattern that would run forever on the plane can crash into the boundary here. Check the boundary before trusting a long run.',
+    },
+    exercise: {
+      text: 'Open the “Conway’s Game of Life” example and watch a random soup settle into still lifes and oscillators. Then build a still life of your own.',
+      challengeId: 'CA-02',
+    },
+    check: [
+      {
+        id: 'c1',
+        question: 'A live cell has 4 live neighbors. What happens to it?',
+        options: ['It survives', 'It dies of overpopulation', 'It splits into two cells'],
+        answer: 1,
+        explanation: 'More than 3 live neighbors: the cell dies.',
+      },
+      {
+        id: 'c2',
+        question: 'What did the glider gun show?',
+        options: ['That every pattern eventually dies out', 'That a finite starting pattern can grow forever', 'That Life is random'],
+        answer: 1,
+        explanation: 'It keeps adding gliders, so on an endless plane its population grows without limit. Life is fully deterministic.',
+      },
+    ],
+    reflection: 'Life has only four rules. Why do you think it produces so many different kinds of patterns?',
   },
   {
     id: 'L03-neighborhoods',
